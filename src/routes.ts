@@ -1,9 +1,10 @@
 import { FastifyInstance } from 'fastify';
-import dayjs from 'dayjs';
-import { z } from 'zod'
-import { prisma } from './lib/prisma';
 
+import { UserServices } from './services/UserServices/UserServices'
+
+const userService = new UserServices()
 export async function appRoutes(app : FastifyInstance){
-
+    app.post('/user', userService.CreateUser)
+    app.get('/users', userService.getUsers)
 }
 
