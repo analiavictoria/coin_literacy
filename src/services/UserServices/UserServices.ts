@@ -15,29 +15,24 @@ interface CustomRequest extends FastifyRequest {
 
 export class UserServices {
    
-    async CreateUser(req : FastifyRequest, res : FastifyReply) {
+    async createUser(req : FastifyRequest, res : FastifyReply) {
         const randomSalt = randomInt(10,16)
         try{
             const createUserBody = z.object({
                 name : z.string(),
                 surname : z.string(),
-                username : z.string(),
                 email : z.string(),
                 password : z.string(),
-                birthdate : z.coerce.date(),
-                CPF : z.string().min(14).max(14)
-
             })
 
-            let { name,surname, username, email, password, birthdate, CPF } = createUserBody.parse(req.body);
+            let { name,surname, email, password} = createUserBody.parse(req.body);
             const today = dayjs().startOf('day').toDate();
-            const parsedDate = dayjs(birthdate).toDate();
     
             password = await bcrypt.hash(password, randomSalt)
 
             let user = await prisma.user.findFirst({
                 where : {
-                    cpf : CPF
+                    email : email
                 }
             })
             
@@ -49,11 +44,8 @@ export class UserServices {
                 data : {
                  name : name,
                  surname : surname,
-                 username: username,
                  email : email, 
                  password : password,
-                 birthdate : parsedDate,
-                 cpf : CPF,
                  created_at : today
      
                 }
@@ -80,12 +72,12 @@ export class UserServices {
     async getUser(req : FastifyRequest, res : FastifyReply) {
         try{
             const findUserBody = z.object({
-                CPF : z.string().min(14).max(14)
+                email : z.string()
             })
-            const { CPF } = findUserBody.parse(req.body)
+            const { email } = findUserBody.parse(req.body)
             const user = await prisma.user.findFirst({
                 where : {
-                    cpf : CPF
+                    email : email
                 }
             });
             if(user){
@@ -126,8 +118,7 @@ export class UserServices {
                     error: 'Incorrect password!'
                 })
             }
-        
-            const token = jwt.sign( {email : user.email, username : user.username} , jwtSecretKey, { expiresIn: '1h' }); // 1 hora de expiração
+            const token = jwt.sign( {email : user.email} , jwtSecretKey, { expiresIn: '1h' }); // 1 hora de expiração
             
           // Retorne o token como resposta
           return res.status(201).send({ user, token });
