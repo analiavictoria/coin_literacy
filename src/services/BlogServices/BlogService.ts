@@ -3,7 +3,6 @@ import { z } from 'zod'
 import { prisma } from '../../lib/prisma';
 import {FastifyRequest, FastifyReply} from "fastify";
 import * as dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
 
 dotenv.config()
 interface CustomRequest extends FastifyRequest {
@@ -11,7 +10,7 @@ interface CustomRequest extends FastifyRequest {
 }
 
 export class BlogPostServices {
-    
+
     async CreateBlogPost(req : CustomRequest, res : FastifyReply){
         try{
             const createBlogPostBody = z.object({
@@ -19,11 +18,22 @@ export class BlogPostServices {
                 title : z.string(),
                 text : z.string(),
             });
+
     
             const { categoryPost, title, text } = createBlogPostBody.parse(req.body);
             const user  = req.user
             const today = dayjs().startOf('day').toDate();
-    
+
+            const blog = await prisma.blogPosts.findFirst({
+                where : {
+                    title : title
+                }
+            })
+            
+            if(blog) {
+                return res.status(200).send({ error: 'Blog Post with same title already exists'}); 
+            }
+
             const blogPost = await prisma.blogPosts.create({
                 data  : { 
                     categoryBlogPost : categoryPost,
@@ -42,7 +52,5 @@ export class BlogPostServices {
                 res.status(500).send({ error: error.message });
             }  
         }
-
     }
-
 }
