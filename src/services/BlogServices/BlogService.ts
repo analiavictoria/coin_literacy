@@ -31,7 +31,7 @@ export class BlogPostServices {
             })
             
             if(blog) {
-                return res.status(200).send({ error: 'Blog Post with same title already exists'}); 
+                return res.status(400).send({ error: 'Blog Post with same title already exists'}); 
             }
 
             const blogPost = await prisma.blogPosts.create({

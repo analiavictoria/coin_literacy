@@ -37,7 +37,7 @@ export class UserServices {
             })
             
             if(user){
-                return res.status(200).send({ message: 'User already exists'}); 
+                return res.status(400).send({ message: 'User already exists'}); 
             }
 
             user = await prisma.user.create({
