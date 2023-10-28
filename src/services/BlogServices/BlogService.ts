@@ -11,9 +11,38 @@ interface CustomRequest extends FastifyRequest {
 }
 
 export class BlogPostServices {
-    async CreateBlogPost(req : FastifyRequest, res : FastifyReply){
-        const createBlogPostBody = z.object({
+    
+    async CreateBlogPost(req : CustomRequest, res : FastifyReply){
+        try{
+            const createBlogPostBody = z.object({
+                categoryPost : z.string(),
+                title : z.string(),
+                text : z.string(),
+            });
+    
+            const { categoryPost, title, text } = createBlogPostBody.parse(req.body);
+            const user  = req.user
+            const today = dayjs().startOf('day').toDate();
+    
+            const blogPost = await prisma.blogPosts.create({
+                data  : { 
+                    categoryBlogPost : categoryPost,
+                    title: title,
+                    text: text,
+                    created_at : today,
+                    author_email : user.email
+                }
+            })
+            return res.status(201).send({ message: 'Post to Blog created succesfully', blogPost}); 
+        }catch(error){
+            if (error instanceof z.ZodError) {
+                const missingFields = error.issues.map((issue) => issue.path.join('.'));
+                res.status(400).send({ error: 'Missing fields in the request', missingFields });
+            } else {
+                res.status(500).send({ error: error.message });
+            }  
+        }
 
-        });
     }
+
 }

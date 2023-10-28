@@ -21,6 +21,7 @@ export class AuthenticateService {
             const tokenWithoutBearer = token.replace('Bearer ', '');
             const decoded = jwt.verify(tokenWithoutBearer, jwtSecretKey);
             req.user = decoded;
+            console.log(req.user);
         }catch(error){
             return res.status(400).send({ error: 'Invalid Token' });
         }

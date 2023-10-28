@@ -47,7 +47,6 @@ export class UserServices {
                  email : email, 
                  password : password,
                  created_at : today
-     
                 }
              })
             return res.status(201).send({ message: 'User created succesfully', user}); 

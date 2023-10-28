@@ -28,9 +28,9 @@ model BlogPosts {
   title            String
   text             String
   created_at       DateTime
-  author_id        String
+  author_email        String
 
-  user User @relation(fields: [author_id], references: [id])
+  user User @relation(fields: [author_email], references: [email])
 
   @@map("blog_posts")
 }
