@@ -17,9 +17,10 @@ export class BlogPostServices {
                 categoryPost : z.string(),
                 title : z.string(),
                 text : z.string(),
+                youtube_url : z.string().optional(),
             });
 
-            const { categoryPost, title, text } = createBlogPostBody.parse(req.body);
+            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(req.body);
             const user  = req.user
             const today = dayjs().startOf('day').toDate();
 
@@ -39,6 +40,7 @@ export class BlogPostServices {
                     title: title,
                     text: text,
                     created_at : today,
+                    youtube_url : youtube_url,
                     author_email : user.email
                 }
             })
@@ -92,13 +94,14 @@ export class BlogPostServices {
                 categoryPost : z.string().optional(),
                 title : z.string().optional(),
                 text : z.string().optional(),
+                youtube_url : z.string().optional(),
             });
     
             const blogPostParam = z.object({
                 id : z.string().uuid(),
             });    
     
-            const { categoryPost, title, text } = createBlogPostBody.parse(req.body);
+            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(req.body);
          
             const { id } = blogPostParam.parse(req.params);
     
@@ -119,7 +122,8 @@ export class BlogPostServices {
                 data : {
                     categoryBlogPost : categoryPost, 
                     title : title,
-                    text : text
+                    text : text,
+                    youtube_url : youtube_url,
                 }
             }) 
             return res.status(200).send({ message:"Blog post Updated", blogPost});

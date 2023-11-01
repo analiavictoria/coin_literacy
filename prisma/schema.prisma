@@ -28,6 +28,7 @@ model BlogPosts {
   title            String
   text             String
   created_at       DateTime
+  youtube_url      String?
   author_email        String
 
   user User @relation(fields: [author_email], references: [email])
