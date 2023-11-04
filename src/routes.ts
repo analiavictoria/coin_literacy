@@ -14,7 +14,7 @@ export async function appRoutes(app : FastifyInstance){
     app.post('/user/search', { preHandler: authenticateService.Authenticate},userService.getUser)
     app.post('/login', userService.loginUser)
 
-    app.post('/blogPost', { preHandler: authenticateService.Authenticate },blogPostService.CreateBlogPost)
+    app.post('/blogPost',{ preHandler: authenticateService.Authenticate },blogPostService.CreateBlogPost)
 
 }
 

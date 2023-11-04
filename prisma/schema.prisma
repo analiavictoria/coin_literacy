@@ -24,12 +24,13 @@ model User {
 
 model BlogPosts {
   id               String   @id @default(uuid()) @map("_id")
+  imageBlog        String?
   categoryBlogPost String
   title            String
   text             String
-  created_at       DateTime
   youtube_url      String?
   author_email        String
+  created_at       DateTime
 
   user User @relation(fields: [author_email], references: [email])
 

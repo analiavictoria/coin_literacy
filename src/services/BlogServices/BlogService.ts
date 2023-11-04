@@ -1,7 +1,9 @@
 import dayjs from 'dayjs';
 import { z } from 'zod'
+import multer from 'multer';
 import { prisma } from '../../lib/prisma';
 import {FastifyRequest, FastifyReply} from "fastify";
+
 import * as dotenv from 'dotenv';
 
 dotenv.config()
@@ -12,6 +14,7 @@ interface CustomRequest extends FastifyRequest {
 export class BlogPostServices {
 
     async CreateBlogPost(req : CustomRequest, res : FastifyReply){
+
         try{
             const createBlogPostBody = z.object({
                 categoryPost : z.string(),
@@ -20,7 +23,13 @@ export class BlogPostServices {
                 youtube_url : z.string().optional(),
             });
 
+            let image = await req.file()
+            console.log(image.fields.blogPost)
+
             const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(req.body);
+
+
+
             const user  = req.user
             const today = dayjs().startOf('day').toDate();
 
@@ -37,6 +46,7 @@ export class BlogPostServices {
             const blogPost = await prisma.blogPosts.create({
                 data  : { 
                     categoryBlogPost : categoryPost,
+                    imageBlog : imageBlogPost,
                     title: title,
                     text: text,
                     created_at : today,

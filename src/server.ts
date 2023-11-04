@@ -4,6 +4,8 @@ import { appRoutes } from "./routes";
 
 const app = Fastify()
 
+app.register(require('@fastify/multipart'))
+
 app.register(cors)
 app.register(appRoutes)
 
