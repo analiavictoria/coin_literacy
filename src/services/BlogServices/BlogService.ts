@@ -1,20 +1,20 @@
 import dayjs from 'dayjs';
 import { z } from 'zod'
-import multer from 'multer';
 import { prisma } from '../../lib/prisma';
 import {FastifyRequest, FastifyReply} from "fastify";
+import Fastify from "fastify";
 
 import * as dotenv from 'dotenv';
 
 dotenv.config()
 interface CustomRequest extends FastifyRequest {
+    parts?: any;
     user?: any;
 }
 
 export class BlogPostServices {
 
     async CreateBlogPost(req : CustomRequest, res : FastifyReply){
-
         try{
             const createBlogPostBody = z.object({
                 categoryPost : z.string(),
@@ -23,12 +23,26 @@ export class BlogPostServices {
                 youtube_url : z.string().optional(),
             });
 
-            let image = await req.file()
-            console.log(image.fields.blogPost)
+            const parts = req.parts()
+            let  imageBlogPost
+            let values : string[] = []
 
-            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(req.body);
+            for await (const part of parts) {
+                if (part.type == "file"){
+                    imageBlogPost = await part.toBuffer()
+                }else if (part.type == "field"){
+                    values.push(part.value)
+                }
+            }
 
+            let fields = {
+                "categoryPost" : values[0],
+                "title" : values[1],
+                "text" : values[2],
+                "youtube_url" : values[3]
+            }
 
+            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(fields);
 
             const user  = req.user
             const today = dayjs().startOf('day').toDate();
@@ -38,7 +52,7 @@ export class BlogPostServices {
                     title : title
                 }
             })
-            
+
             if(blog) {
                 return res.status(400).send({ error: 'Blog Post with same title already exists'}); 
             }
@@ -54,12 +68,14 @@ export class BlogPostServices {
                     author_email : user.email
                 }
             })
+            
             return res.status(201).send({ message: 'Post to Blog created succesfully', blogPost}); 
         }catch(error){
             if (error instanceof z.ZodError) {
                 const missingFields = error.issues.map((issue) => issue.path.join('.'));
                 res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
+            }
+            else {
                 res.status(500).send({ error: error.message });
             }  
         }
@@ -68,12 +84,12 @@ export class BlogPostServices {
     async SearchBlogPost(req : CustomRequest, res : FastifyReply){
         try {
             const blogPostParam = z.object({
-                id : z.string().uuid(),
+                title : z.string(),
             });         
-            const { id } = blogPostParam.parse(req.params);
+            const { title } = blogPostParam.parse(req.params);
             const blogPost = await prisma.blogPosts.findFirst({ 
                 where : {
-                    id : id
+                    title : title
                 }
              });
             if(!blogPost){
