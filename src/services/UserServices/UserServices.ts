@@ -13,59 +13,50 @@ interface CustomRequest extends FastifyRequest {
     user?: any;
 }
 
+interface User {
+    name : string;
+    surname : string;
+    email : string;
+    password : string;
+}
+
 export class UserServices {
    
-    async createUser(req : FastifyRequest, res : FastifyReply) {
+    async createUser(user : User) {
         const randomSalt = randomInt(10,16)
-        try{
-            const createUserBody = z.object({
-                name : z.string(),
-                surname : z.string(),
-                email : z.string(),
-                password : z.string(),
-            })
 
-            let { name,surname, email, password} = createUserBody.parse(req.body);
             const today = dayjs().startOf('day').toDate();
     
-            password = await bcrypt.hash(password, randomSalt)
+            user.password = await bcrypt.hash(user.password, randomSalt)
 
-            let user = await prisma.user.findFirst({
+            let userExists = await prisma.user.findFirst({
                 where : {
-                    email : email
+                    email : user.email
                 }
             })
             
-            if(user){
-                return res.status(400).send({ message: 'User already exists'}); 
+            if(userExists){
+               throw new Error("User already exists")
             }
 
-            user = await prisma.user.create({
+            const new_user = await prisma.user.create({
                 data : {
-                 name : name,
-                 surname : surname,
-                 email : email, 
-                 password : password,
+                 name : user.name,
+                 surname : user.surname,
+                 email :user.email, 
+                 password : user.password,
                  created_at : today
                 }
              })
-            return res.status(201).send({ message: 'User created succesfully', user}); 
-        }catch(error) {
-            if (error instanceof z.ZodError) {
-            const missingFields = error.issues.map((issue) => issue.path.join('.'));
-            res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
-            res.status(500).send({ error: error.message });
-            }
-        }  
+             return new_user
     }
 
-    async getUsers(req : FastifyRequest, res : FastifyReply) {
+    async getUsers() {
         const users = await prisma.user.findMany();
         if( users.length > 0 ){
-            return res.status(200).send({ message: 'Users found', users}); 
+            return users
         }
-        return res.status(400).send({ message: 'No registered users'}); 
+        throw new Error("No users found")
     }
 
     async getUser(req : FastifyRequest, res : FastifyReply) {
