@@ -3,7 +3,7 @@ const BlogData = [
     id: 1,
     title: 'Como o blockhain está revolucionando o mundo',
     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
-    imageUrl: 'images/blog/Bitcoin.png',
+    imageUrl: "images/blog/Bitcoin.png",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const BlogData = [
     id: 3,
     title: 'Tudo o que sabemos sobre Satoshi Nakamoto',
     content: 'Mauris eu purus a purus volutpat bibendum sit amet eget mi.',
-    imageUrl: 'images/blog/Secret-bro.png',
+    imageUrl: 'images/blog/Crypto_portfolio.png',
   }
   
 ];

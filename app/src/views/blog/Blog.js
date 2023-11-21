@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import BlogPost from './BlogPost'; // Import the BlogPost component
-import BlogData from './BlogData'; // Import your mock blog data
+import BlogPost from './BlogPost';
+import BlogData from './BlogData';
 import MainCard from 'ui-component/cards/MainCard';
 
 function Blog() {

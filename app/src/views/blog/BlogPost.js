@@ -7,7 +7,7 @@ import SubCard from 'ui-component/cards/SubCard';
 function BlogPost({ title, content, imageUrl }) {
   return (
       <SubCard>
-      <CardMedia component="img" height="200" image={imageUrl} alt={title} />
+      <CardMedia component="img" height="200" src={imageUrl} alt={title} />
       <CardContent>
         <Typography variant="h4" component="div" align="center" sx={{m:1}}>
           {title}

@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FormControl, InputLabel, MenuItem, Select, TextField, Typography, Box } from '@mui/material';
+import { FormControl, MenuItem, TextField, Typography, Box, InputAdornment } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBitcoin,
-  faEthereum
-  // Add cryptocurrency icons
-} from '@fortawesome/free-brands-svg-icons';
-import { Euro } from '@mui/icons-material';
+import { IconTransform } from '@tabler/icons' 
+
 
 function Conversor() {
-  const [cripto, setCripto] = useState('bitcoin'); // Sets the default cryptocurrency
-  const [fiat, setFiat] = useState('brl'); // Sets the default fiat currency
+  const [cripto, setCripto] = useState('bitcoin');
+  const [fiat, setFiat] = useState('brl');
   const [valorCripto, setValorCripto] = useState(0);
   const [valorFiat, setValorFiat] = useState(0);
 
@@ -37,27 +32,25 @@ function Conversor() {
   }, [cripto, fiat, valorCripto]);
 
   return (
-    <div>
+    <Box
+    component="form"
+    sx={{
+      '& .MuiTextField-root': { m: 1, width: '25ch' },
+    }}
+    >
       <MainCard>
         <Typography variant="h1" m={2}>
-          Conversor de criptomoedas
+          <IconTransform/> Conversor de criptomoedas
         </Typography>
+        <Typography variant='h4' m={2}>Desbrave o mundo das criptomoedas com facilidade! </Typography>
+        <Typography variant="subtitle2" m={2}>     
+        Nosso conversor simplifica a conversão entre diferentes moedas, uma ferramenta essencial para quem busca acompanhar as tendências do mercado e realizar transações com praticidade e segurança.
+      </Typography>
 
-      <Box  component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 1, width: '25ch' },
-      }}> 
       <FormControl>
-          <InputLabel>Criptomoeda</InputLabel>
-          <Select value={cripto} onChange={(e) => setCripto(e.target.value)}>
-            <MenuItem value="bitcoin">
-              <FontAwesomeIcon icon={faBitcoin} />
-              Bitcoin (BTC)
-            </MenuItem>
-            <MenuItem value="ethereum">
-              <FontAwesomeIcon icon={faEthereum} />
-              Ethereum (ETH)
-            </MenuItem>
+          <TextField select label="Criptomoeda" value={cripto} onChange={(e) => setCripto(e.target.value)}>
+            <MenuItem value="bitcoin">Bitcoin (BTC)</MenuItem>
+            <MenuItem value="ethereum">Ethereum (ETH)</MenuItem>
             <MenuItem value="binancecoin">Binance Coin (BNB)</MenuItem>
             <MenuItem value="cardano">Cardano (ADA)</MenuItem>
             <MenuItem value="solana">Solana (SOL)</MenuItem>
@@ -66,18 +59,15 @@ function Conversor() {
             <MenuItem value="dogecoin">Dogecoin (DOGE)</MenuItem>
             <MenuItem value="chainlink">Chainlink (LINK)</MenuItem>
             <MenuItem value="litecoin">Litecoin (LTC)</MenuItem>
-          </Select>
+          </TextField>
         </FormControl>
 
 
         <FormControl>
-          <InputLabel>Moeda Fiduciária</InputLabel>
-          <Select value={fiat} onChange={(e) => setFiat(e.target.value)}>
+          <TextField select label="Moeda fiduciária*" value={fiat} onChange={(e) => setFiat(e.target.value)} helperText="*Emitida por governos e bancos">
             <MenuItem value="brl">Real Brasileiro (BRL)</MenuItem>
             <MenuItem value="usd">Dólar Americano (USD)</MenuItem>
-            <MenuItem value="eur">
-              <Euro /> Euro (EUR)
-            </MenuItem>
+            <MenuItem value="eur">Euro (EUR)</MenuItem>
             <MenuItem value="gbp">Libra Esterlina (GBP)</MenuItem>
             <MenuItem value="jpy">Iene Japonês (JPY)</MenuItem>
             <MenuItem value="chf">Franco Suíço (CHF)</MenuItem>
@@ -86,13 +76,17 @@ function Conversor() {
             <MenuItem value="cny">Yuan Chinês (CNY)</MenuItem>
             <MenuItem value="sgd">Dólar de Cingapura (SGD)</MenuItem>
             <MenuItem value="mxn">Peso Mexicano (MXN)</MenuItem>
-          </Select>
+          </TextField>
         </FormControl >
-        <TextField label="Valor em Criptomoeda" type="number" value={valorCripto} onChange={(e) => setValorCripto(e.target.value)} />
-        <TextField label="Valor em Moeda Fiduciária" type="number" value={valorFiat} disabled />
-      </Box>
+
+        <TextField label="Valor em Criptomoeda" type="number" value={valorCripto} onChange={(e) => setValorCripto(e.target.value)}  InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }} />
+        <TextField label="Valor em Moeda Fiduciária" type="number" value={valorFiat} disabled InputProps={{
+            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+          }} />
       </MainCard>
-    </div>
+      </Box>
   );
 }
 export default Conversor;

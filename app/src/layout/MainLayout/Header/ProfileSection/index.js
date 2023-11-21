@@ -22,9 +22,6 @@ import {
   Typography
 } from '@mui/material';
 
-// third-party
-import PerfectScrollbar from 'react-perfect-scrollbar';
-
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
@@ -42,10 +39,8 @@ const ProfileSection = () => {
 
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
-  /**
-   * anchorRef is used on different componets and specifying one type leads to other components throwing an error
-   * */
   const anchorRef = useRef(null);
+  
   const handleLogout = async () => {
     console.log('Logout');
   };
@@ -147,7 +142,7 @@ const ProfileSection = () => {
                 <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                   <Box sx={{ p: 2 }}>
                     <Stack>
-                      <Stack direction="row" spacing={0.5} alignItems="center" margin={2}>
+                      <Stack direction="row" alignItems="center" margin={2}>
                         <Typography variant="h4">Boa noite,</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
                           José Maria
@@ -156,8 +151,7 @@ const ProfileSection = () => {
                     </Stack>
                     <Divider />
                   </Box>
-                  <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
-                    <Box sx={{ p: 2 }}>
+                    <Box sx={{ p: 1 }}>
                       <List
                         component="nav"
                         sx={{
@@ -224,7 +218,6 @@ const ProfileSection = () => {
                         </ListItemButton>
                       </List>
                     </Box>
-                  </PerfectScrollbar>
                 </MainCard>
               </ClickAwayListener>
             </Paper>

@@ -5,7 +5,7 @@ export default function componentStyleOverrides(theme) {
       styleOverrides: {
         root: {
           fontWeight: 500,
-          borderRadius: '4px'
+          borderRadius: '4x',
         }
       }
     },
@@ -182,6 +182,6 @@ export default function componentStyleOverrides(theme) {
           background: theme.colors?.grey700
         }
       }
-    }
+    },
   };
 }
