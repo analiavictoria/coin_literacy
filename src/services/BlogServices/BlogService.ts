@@ -12,156 +12,98 @@ interface CustomRequest extends FastifyRequest {
     user?: any;
 }
 
+interface BlogPost {
+    categoryPost : string;
+    imageBlogPost : any;
+    title : string;
+    text : string;
+    youtube_url? : string;
+    author_email : string;
+}
+
+interface BlogPostUpdate {
+    id : string;
+    categoryPost? : string;
+    imageBlogPost? : any;
+    title? : string;
+    text? : string;
+    youtube_url? : string;
+    author_email? : string;
+}
+
+
 export class BlogPostServices {
 
-    async CreateBlogPost(req : CustomRequest, res : FastifyReply){
-        try{
-            const createBlogPostBody = z.object({
-                categoryPost : z.string(),
-                title : z.string(),
-                text : z.string(),
-                youtube_url : z.string().optional(),
-            });
-
-            const parts = req.parts()
-            let  imageBlogPost
-            let values : string[] = []
-
-            for await (const part of parts) {
-                if (part.type == "file"){
-                    imageBlogPost = await part.toBuffer()
-                }else if (part.type == "field"){
-                    values.push(part.value)
-                }
-            }
-
-            let fields = {
-                "categoryPost" : values[0],
-                "title" : values[1],
-                "text" : values[2],
-                "youtube_url" : values[3]
-            }
-
-            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(fields);
-
-            const user  = req.user
-            const today = dayjs().startOf('day').toDate();
+    async CreateBlogPost(post : BlogPost){
+        
+        const today = dayjs().startOf('day').toDate();
 
             const blog = await prisma.blogPosts.findFirst({
                 where : {
-                    title : title
+                    title : post.title
                 }
             })
 
             if(blog) {
-                return res.status(400).send({ error: 'Blog Post with same title already exists'}); 
+                throw new Error('Blog Post with same title already exists')
             }
 
             const blogPost = await prisma.blogPosts.create({
                 data  : { 
-                    categoryBlogPost : categoryPost,
-                    imageBlog : imageBlogPost,
-                    title: title,
-                    text: text,
+                    categoryBlogPost : post.categoryPost,
+                    imageBlog : post.imageBlogPost,
+                    title: post.title,
+                    text: post.text,
                     created_at : today,
-                    youtube_url : youtube_url,
-                    author_email : user.email
+                    youtube_url : post.youtube_url,
+                    author_email : post.author_email
                 }
             })
-            
-            return res.status(201).send({ message: 'Post to Blog created succesfully', blogPost}); 
-        }catch(error){
-            if (error instanceof z.ZodError) {
-                const missingFields = error.issues.map((issue) => issue.path.join('.'));
-                res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            }
-            else {
-                res.status(500).send({ error: error.message });
-            }  
-        }
+
+            return blogPost
     }
 
-    async SearchBlogPost(req : CustomRequest, res : FastifyReply){
-        try {
-            const blogPostParam = z.object({
-                title : z.string(),
-            });         
-            const { title } = blogPostParam.parse(req.params);
-            const blogPost = await prisma.blogPosts.findFirst({ 
-                where : {
-                    title : title
-                }
-             });
-            if(!blogPost){
-                return res.status(400).send({ error : "No blog post found"})
+    async SearchBlogPost(title : string){
+        const blogPost = await prisma.blogPosts.findFirst({ 
+            where : {
+                title : title
             }
-            return res.status(200).send({ message:"Blog post found", blogPost});
-        }catch(error){
-            if (error instanceof z.ZodError) {
-                const missingFields = error.issues.map((issue) => issue.path.join('.'));
-                res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
-                res.status(500).send({ error: error.message });
-            }  
+         });
+        if(!blogPost){
+            throw new Error('Blog Post with title does not exists')
         }
+        return blogPost;
     }
 
-    async SearchAllBlogPosts(req : CustomRequest, res : FastifyReply){
+    async SearchAllBlogPosts(){
         const allBlogPosts = await prisma.blogPosts.findMany();
         if( allBlogPosts.length > 0 ){
-            return res.status(200).send({ message: 'Users found', allBlogPosts}); 
+            return allBlogPosts
         }
-        return res.status(400).send({ message: 'No registered users'}); 
+        throw new Error('No registered Blog Posts')
     }
 
-    async UpdateBlogPost(req : CustomRequest, res : FastifyReply){
-        try { 
-            const createBlogPostBody = z.object({
-                categoryPost : z.string().optional(),
-                title : z.string().optional(),
-                text : z.string().optional(),
-                youtube_url : z.string().optional(),
-            });
-    
-            const blogPostParam = z.object({
-                id : z.string().uuid(),
-            });    
-    
-            const { categoryPost, title, text, youtube_url } = createBlogPostBody.parse(req.body);
-         
-            const { id } = blogPostParam.parse(req.params);
-    
-            let blogPost = await prisma.blogPosts.findFirst({ 
-                where : { 
-                    id : id 
-                }, 
-            });
-    
-            if(!blogPost){
-                return res.status(400).send({ error : "No blog post found"})
+    async UpdateBlogPost(blogPostUpdate : BlogPostUpdate){
+        const blogPost = await prisma.blogPosts.findFirst({
+            where : {
+                id : blogPostUpdate.id
             }
-            
-            blogPost = await prisma.blogPosts.update({
-                where : {
-                    id : id
-                },
-                data : {
-                    categoryBlogPost : categoryPost, 
-                    title : title,
-                    text : text,
-                    youtube_url : youtube_url,
-                }
-            }) 
-            return res.status(200).send({ message:"Blog post Updated", blogPost});
-        }catch(error){
-            if (error instanceof z.ZodError) {
-                const missingFields = error.issues.map((issue) => issue.path.join('.'));
-                res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
-                res.status(500).send({ error: error.message });
-            }  
+        })
+        if(!blogPost){
+            throw new Error('Blog Post does not exist')
         }
-        
+
+        const BlogPostUpdated = await prisma.blogPosts.update({
+            where : {
+                id : blogPostUpdate.id,
+                author_email : blogPostUpdate.author_email,
+            }, data : {
+                title : blogPostUpdate.title,
+                text : blogPostUpdate.text,
+                youtube_url : blogPostUpdate.youtube_url
+            }
+        })
+        return BlogPostUpdated
     }
 
     async DeleteBlogPost(req : CustomRequest, res : FastifyReply){

@@ -26,7 +26,7 @@ model BlogPosts {
   id               String   @id @default(uuid()) @map("_id")
   imageBlog        Bytes?
   categoryBlogPost String
-  title            String
+  title            String @unique
   text             String
   youtube_url      String?
   author_email        String

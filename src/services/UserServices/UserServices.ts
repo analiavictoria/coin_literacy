@@ -20,6 +20,11 @@ interface User {
     password : string;
 }
 
+interface Login {
+    email : string;
+    password : string;
+}
+
 export class UserServices {
    
     async createUser(user : User) {
@@ -59,67 +64,36 @@ export class UserServices {
         throw new Error("No users found")
     }
 
-    async getUser(req : FastifyRequest, res : FastifyReply) {
-        try{
-            const findUserBody = z.object({
-                email : z.string()
-            })
-            const { email } = findUserBody.parse(req.body)
-            const user = await prisma.user.findFirst({
-                where : {
-                    email : email
-                }
-            });
-            if(user){
-                return res.status(200).send({ message: 'User Found', user }); 
+    async getUser(email : string) {
+        const user = await prisma.user.findFirst({
+            where : {
+                email : email
             }
-            return res.status(400).send({ message: 'User not registered' }); 
-        }catch(error) {
-            if (error instanceof z.ZodError) {
-            const missingFields = error.issues.map((issue) => issue.path.join('.'));
-            res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
-            res.status(500).send({ error: error.message });
-            }
-        }  
-    }
+        });
+        if(!user){
+            throw new Error("User does not exists")
+        }
+        return user
+    }   
 
-    async loginUser(req : FastifyRequest, res : FastifyReply){
+    async loginUser(login : Login){
         const jwtSecretKey = process.env.JWT_SECRET
-        try{
-            const loginUserBody = z.object({
-                email : z.string(),
-                password : z.string()
-
-            })
-            const { email, password } = loginUserBody.parse(req.body);
-
             const user = await prisma.user.findFirst({
                 where : {
-                    email : email,
+                    email : login.email,
                 }
             })
 
             if(!user){
-                return res.status(400).send({ error: 'User not found' });
+                throw new Error("User does not exists")
             }
-            if (! await bcrypt.compare(password, user.password)) {
-                return res.status(400).send({
-                    error: 'Incorrect password!'
-                })
+            if (! await bcrypt.compare(login.password, user.password)) {
+                throw new Error("Incorrect Password")
             }
             const token = jwt.sign( {email : user.email} , jwtSecretKey, { expiresIn: '1h' }); // 1 hora de expiração
             
-          // Retorne o token como resposta
-          return res.status(201).send({ user, token });
-        }catch(error) {
-            if (error instanceof z.ZodError) {
-            const missingFields = error.issues.map((issue) => issue.path.join('.'));
-            res.status(400).send({ error: 'Missing fields in the request', missingFields });
-            } else {
-            res.status(500).send({ error: error.message });
-            }
-        }  
-    }
+            // Retorne o token como resposta
+            return token ;
+        }
 }
 

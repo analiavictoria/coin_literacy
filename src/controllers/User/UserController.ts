@@ -57,4 +57,50 @@ export class UserController {
             }
         }  
     }
+
+    async getUser(req : FastifyRequest, res : FastifyReply) {
+        try{
+            const findUserBody = z.object({
+                email : z.string()
+            })
+            const { email } = findUserBody.parse(req.body)
+
+            const user = await userService.getUser(email)
+
+            return res.status(200).send({ "User" : user }); 
+        }catch(error) {
+            if (error instanceof z.ZodError) {
+            const missingFields = error.issues.map((issue) => issue.path.join('.'));
+            res.status(400).send({ error: 'Missing fields in the request', missingFields });
+            } else {
+            res.status(500).send({ error: error.message });
+            }
+        }  
+    }
+
+    async loginUser(req : FastifyRequest, res : FastifyReply){
+        const jwtSecretKey = process.env.JWT_SECRET
+        try{
+            const loginUserBody = z.object({
+                email : z.string(),
+                password : z.string()
+
+            })
+            const { email, password } = loginUserBody.parse(req.body);
+
+            const login = { email, password }
+
+            const token = await userService.loginUser(login)
+            
+            // Retorne o token como resposta
+            return res.status(201).send({ "Token: " : token });
+        }catch(error) {
+            if (error instanceof z.ZodError) {
+            const missingFields = error.issues.map((issue) => issue.path.join('.'));
+            res.status(400).send({ error: 'Missing fields in the request', missingFields });
+            } else {
+            res.status(500).send({ error: error.message });
+            }
+        }  
+    }
 }
