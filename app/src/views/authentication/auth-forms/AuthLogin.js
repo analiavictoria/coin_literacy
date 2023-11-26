@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import api from '../../../api/api';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Box,
   Button,
@@ -33,6 +35,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
@@ -58,8 +61,8 @@ const FirebaseLogin = ({ ...others }) => {
 
       <Formik
         initialValues={{
-          email: 'tcc@heludela.com',
-          password: 'nota10',
+          email: '',
+          password: '',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -68,21 +71,23 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            if (scriptedRef.current) {
+            const response = await api.post('login', values)
+            if (response.status == 200) {
+              navigate("/dashboard");
               setStatus({ success: true });
-              setSubmitting(false);
+              setSubmitting(true);
             }
           } catch (err) {
-            console.error(err);
             if (scriptedRef.current) {
               setStatus({ success: false });
-              setErrors({ submit: err.message });
+              console.log(err);
+              setErrors({ submit: err.response.data.error});
               setSubmitting(false);
             }
           }
         }}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
+        {({ errors, handleBlur, handleChange, handleSubmit, touched, values }) => (
           <form noValidate onSubmit={handleSubmit} {...others}>
             <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-login">Endereço de email</InputLabel>
@@ -153,7 +158,7 @@ const FirebaseLogin = ({ ...others }) => {
 
             <Box sx={{ mt: 2 }}>
               <AnimateButton>
-                <Button disableElevation disabled={isSubmitting} fullWidth size="large" component={Link} to="/dashboard" type="submit" variant="contained" color="primary" >
+                <Button fullWidth size="large" type="submit" variant="contained" color="primary" >
                   Entrar
                 </Button>
               </AnimateButton>
