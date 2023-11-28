@@ -10,7 +10,7 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
 // utilities routing
 const Aprenda = Loadable(lazy(() => import('views/resources/Aprenda')));
 const Conversor = Loadable(lazy(() => import('views/resources/Conversor')));
-const Forum = Loadable(lazy(() => import('views/forum/Forum')));
+const Forum = Loadable(lazy(() => import('views/forum/ForumApp')));
 
 // blog routing
 const Blog = Loadable(lazy(() => import('views/blog/Blog')));
