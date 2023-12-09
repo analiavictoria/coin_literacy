@@ -5,10 +5,10 @@ import MinimalLayout from 'layout/MinimalLayout';
 import Loadable from 'ui-component/Loadable';
 
 // login routing
-const LandingPage = Loadable(lazy(() => import('views/homepage/home')));
+const LandingPage = Loadable(lazy(() => import('views/homepage/MainHome')));
 const AuthLogin = Loadable(lazy(() => import('views/authentication/auth/Login')));
 const AuthRegister = Loadable(lazy(() => import('views/authentication/auth/Register')));
-// const AuthForgotPassword = Loadable(lazy(() => import('views/pages/authentication/ForgotPassword')));
+// const AuthForgotPassword = Loadable(lazy(() => import('views/authentication/ForgotPassword')));
 
 // ==============================|| AUTH ROUTING ||============================== //
 

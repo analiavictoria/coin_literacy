@@ -1,9 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import {
   Avatar,
@@ -43,6 +40,7 @@ const ProfileSection = () => {
   
   const handleLogout = async () => {
     console.log('Logout');
+    navigation.navigate('HomePage')
   };
 
   const handleClose = (event) => {

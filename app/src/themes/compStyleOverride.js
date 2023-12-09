@@ -4,6 +4,7 @@ export default function componentStyleOverrides(theme) {
     MuiButton: {
       styleOverrides: {
         root: {
+          color: '#fff',
           fontWeight: 500,
           borderRadius: '4x',
         }
