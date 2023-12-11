@@ -19,10 +19,10 @@ function FeaturedPost(props) {
               {post.title}
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+              {post.tags}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.body}
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...
@@ -31,7 +31,7 @@ function FeaturedPost(props) {
           <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={post.image}
+            src={post.imageurl}
             alt={post.imageLabel}
           />
         </Card>

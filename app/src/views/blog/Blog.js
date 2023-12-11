@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
@@ -11,6 +12,8 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 import post1 from './blog-post.1.md'
 import MainCard from 'ui-component/cards/MainCard';
+
+import axios from 'axios';
 
 
 const sections = [
@@ -33,24 +36,26 @@ const mainFeaturedPost = {
   linkText: 'Continue reading…',
 };
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?blockchain',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random?cryptocurrency',
-    imageLabel: 'Image Text',
-  },
-];
+// const featuredPosts = [
+//   {
+//     title: 'Featured post',
+//     date: 'Nov 12',
+//     description:
+//       'This is a wider card with supporting text below as a natural lead-in to additional content.',
+//     image: 'https://source.unsplash.com/random?blockchain',
+//     imageLabel: 'Image Text',
+//   },
+//   {
+//     title: 'Post title',
+//     date: 'Nov 11',
+//     description:
+//       'This is a wider card with supporting text below as a natural lead-in to additional content.',
+//     image: 'https://source.unsplash.com/random?cryptocurrency',
+//     imageLabel: 'Image Text',
+//   },
+// ];
+
+
 
 const posts = [post1];
 
@@ -58,6 +63,24 @@ const posts = [post1];
 const defaultTheme = createTheme();
 
 export default function Blog() {
+  const [cryptoNews, setCryptoNews] = useState([]);
+
+  useEffect(() => {
+    const fetchCryptoData = async () => {
+      try {
+        const response = await axios.get(
+          'https://min-api.cryptocompare.com/data/v2/news/?lang=PT',
+        );
+        console.log(response)
+        setCryptoNews(response.data.Data);
+        console.log(cryptoNews)
+      } catch (error) {
+        console.error('Error fetching cryptocurrency data:', error);
+      }
+    };
+    fetchCryptoData();
+  }, []);
+
   return (
     <MainCard>
     <ThemeProvider theme={defaultTheme}>
@@ -67,7 +90,7 @@ export default function Blog() {
         <main>
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
-            {featuredPosts.map((post) => (
+            {cryptoNews.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
           </Grid>
