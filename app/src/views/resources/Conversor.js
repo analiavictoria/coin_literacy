@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FormControl, MenuItem, TextField, Typography, Box, InputAdornment } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
-import { IconTransform } from '@tabler/icons' 
+import BannerImage from './Coin Literacy Conversor.png'
+import ReactCountryFlag from "react-country-flag"
 
 
 function Conversor() {
@@ -39,12 +40,15 @@ function Conversor() {
     }}
     >
       <MainCard>
-        <Typography variant="h1" m={2}>
-          <IconTransform/> Conversor de criptomoedas
-        </Typography>
-        <Typography variant='h4' m={2}>Desbrave o mundo das criptomoedas com facilidade! </Typography>
-        <Typography variant="subtitle2" m={2}>     
-        Nosso conversor simplifica a conversão entre diferentes moedas, uma ferramenta essencial para quem busca acompanhar as tendências do mercado e realizar transações com praticidade e segurança.
+      <img 
+        src={BannerImage} 
+        alt="Banner Criptomoedas"
+        style={{ width: '100%', marginBottom: '16px' }} 
+        >
+        </img>
+        <Typography variant='h2' m={2} color={'primary'}>Desbrave o mundo das criptomoedas com facilidade! </Typography>
+        <Typography variant="h5" m={2}>     
+        Nosso conversor simplifica a conversão entre diferentes moedas, uma ferramenta essencial para quem busca acompanhar as tendências do mercado e realizar transações com praticidade e segurança. Experimente!
       </Typography>
 
       <FormControl>
@@ -64,8 +68,11 @@ function Conversor() {
 
 
         <FormControl>
-          <TextField select label="Moeda fiduciária*" value={fiat} onChange={(e) => setFiat(e.target.value)} helperText="*Emitida por governos e bancos">
-            <MenuItem value="brl">Real Brasileiro (BRL)</MenuItem>
+          <TextField select label="Moeda fiduciária*" value={fiat} onChange={(e) => setFiat(e.target.value)}>
+          <MenuItem value="brl">
+            <ReactCountryFlag countryCode="BR" svg style={{ width: '2em', height: '2em', paddingRight:'10px' }}
+            />Real Brasileiro (BRL)
+            </MenuItem>
             <MenuItem value="usd">Dólar Americano (USD)</MenuItem>
             <MenuItem value="eur">Euro (EUR)</MenuItem>
             <MenuItem value="gbp">Libra Esterlina (GBP)</MenuItem>
@@ -82,8 +89,8 @@ function Conversor() {
         <TextField label="Valor em Criptomoeda" type="number" value={valorCripto} onChange={(e) => setValorCripto(e.target.value)}  InputProps={{
             startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }} />
-        <TextField label="Valor em Moeda Fiduciária" type="number" value={valorFiat} disabled InputProps={{
-            startAdornment: <InputAdornment position="start">$</InputAdornment>,
+        <TextField label="Valor em Moeda Fiduciária" type="number" value={valorFiat} InputProps={{
+           readOnly: true, startAdornment: <InputAdornment position="start">$</InputAdornment>,
           }} />
       </MainCard>
       </Box>

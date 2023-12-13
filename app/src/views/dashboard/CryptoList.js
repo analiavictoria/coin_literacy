@@ -3,12 +3,14 @@ import axios from 'axios';
 import CryptoCard from './CryptoCard';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { Grid, Paper} from '@mui/material';
 
 const CryptoList = () => {
   const [cryptoData, setCryptoData] = useState([]);
   const [selectedCurrency, setSelectedCurrency] = useState('brl');
 
   const currencies = [
+    { label: 'BRL - Real Brasileiro', value: 'brl' },
     { label: 'USD - Dólar Americano', value: 'usd' },
     { label: 'EUR - Euro', value: 'eur' },
     { label: 'JPY - Iene Japonês', value: 'jpy' },
@@ -17,7 +19,6 @@ const CryptoList = () => {
     { label: 'CAD - Dólar Canadense', value: 'cad' },
     { label: 'CNY - Yuan Chinês', value: 'cny' },
     { label: 'INR - Rúpia Indiana', value: 'inr' },
-    { label: 'BRL - Real Brasileiro', value: 'brl' },
     { label: 'KRW - Won Sul-Coreano', value: 'krw' },
   ];
 
@@ -50,6 +51,11 @@ const CryptoList = () => {
     setSelectedCurrency(event.target.value);
   };
 
+  // Split the cryptoData into two columns
+  const midIndex = Math.ceil(cryptoData.length / 2);
+  const firstColumn = cryptoData.slice(0, midIndex);
+  const secondColumn = cryptoData.slice(midIndex);
+
   return (
     <div>
       <div>
@@ -68,7 +74,18 @@ const CryptoList = () => {
           ))}
         </TextField>
       </div>
-      <CryptoCard title="Top Criptomoedas" data={cryptoData} />
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Paper elevation={0} style={{ padding: '10px' }}>
+            <CryptoCard data={firstColumn} />
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper elevation={0} style={{ padding: '10px' }}>
+            <CryptoCard data={secondColumn} />
+          </Paper>
+        </Grid>
+      </Grid>
     </div>
   );
 };

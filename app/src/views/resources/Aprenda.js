@@ -1,4 +1,5 @@
-import { Grid } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Grid, Typography } from '@mui/material';
 import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
@@ -14,19 +15,21 @@ const Aprenda = () => {
   };
 
   const BlockchainVideoId = '9JWCAbVTMlY'; 
-  
+
   return (
     <MainCard title="Coin literacy explica:">
-
       <Grid container spacing={gridSpacing}>
-
         <Grid item xs={12} sm={6}>
-          <SubCard title="Cripto 101: dando os primeiros passos">
-          </SubCard>
+          <Link to="/cripto-101">
+            <SubCard title="Cripto 101: dando os primeiros passos" summary="Um guia introdutório sobre o mundo das criptomoedas.">
+              <Typography variant="body2">Conteúdo adicional aqui, se necessário.</Typography>
+            </SubCard>
+          </Link>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <SubCard title="O que é blockchain?">
+            {/* Conteúdo do SubCard */}
           </SubCard>
         </Grid>
 
@@ -38,9 +41,9 @@ const Aprenda = () => {
 
         <Grid item xs={12} sm={6}>
           <SubCard title="Dicionário do cripto">
+            {/* Conteúdo do SubCard */}
           </SubCard>
         </Grid>
-
       </Grid>  
     </MainCard>
   );

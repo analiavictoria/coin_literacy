@@ -41,7 +41,7 @@ export class UserServices {
             })
             
             if(userExists){
-               throw new Error("User already exists")
+               throw new Error("Usuário já existe")
             }
 
             const new_user = await prisma.user.create({
@@ -61,7 +61,7 @@ export class UserServices {
         if( users.length > 0 ){
             return users
         }
-        throw new Error("No users found")
+        throw new Error("Nenhum usuário encontrado")
     }
 
     async getUser(email : string) {
@@ -71,7 +71,7 @@ export class UserServices {
             }
         });
         if(!user){
-            throw new Error("User does not exists")
+            throw new Error("Usuário não existe")
         }
         return user
     }   
@@ -85,10 +85,10 @@ export class UserServices {
             })
 
             if(!user){
-                throw new Error("User does not exists")
+                throw new Error("Usuário não existe")
             }
             if (! await bcrypt.compare(login.password, user.password)) {
-                throw new Error("Incorrect Password")
+                throw new Error("Usuário ou senha incorreta")
             }
             const token = jwt.sign( {email : user.email} , jwtSecretKey, { expiresIn: '1h' }); // 1 hora de expiração
             

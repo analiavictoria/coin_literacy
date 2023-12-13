@@ -40,7 +40,7 @@ const ProfileSection = () => {
   
   const handleLogout = async () => {
     console.log('Logout');
-    navigation.navigate('HomePage')
+    navigation.navigate('/')
   };
 
   const handleClose = (event) => {

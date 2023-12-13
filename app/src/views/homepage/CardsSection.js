@@ -37,12 +37,12 @@ const ToolsSection = () => {
       id: 3,
       icon: <WalletIcon isHovered={hoveredItem === 3}  />,
       title:'Decida',
-      sentence: 'Você está pronto para mergulhar no mundo das criptomoedas? Depois de entender o básico, você estará ansioso para decidir se é certo para você. Chegou a hora de explorar a infinidade de criptomoedas disponíveis. Aproveite as oportunidades e previna-se dos riscos!',
+      sentence: 'Você está pronto para mergulhar no mundo das criptomoedas? Depois de entender o básico, chegou a hora de explorar a infinidade de criptomoedas disponíveis. Aproveite as oportunidades e previna-se dos riscos!',
     },
   ];
 
   return (
-    <Box sx={{ flexGrow: 1, py:'3%' }} id='about'>
+    <Box sx={{ flexGrow: 1, py:'10%', minHeight: '300px', px:'3%'}} >
       <Grid container sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
         {sectionItems.map((item) => (
           <Grid

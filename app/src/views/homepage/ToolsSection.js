@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Grid, Typography, Box } from '@mui/material';
-import BitcoinSVG from './Bitcoin.svg';
-import WalletSVG from './E-Wallet.svg';
-import RevenueSVG from './Revenue.svg';
+import BlogSVG from './Blog post.svg'
+import LearnSVG from './Course app.svg';
+import ConverterSVG from './Calculator.svg';
 
-const BitcoinIcon = ({ isHovered }) => (
-  <img src={BitcoinSVG} alt="Bitcoin Icon" style={{ width: 300, height: 300, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
+const BlogIcon = ({ isHovered }) => (
+  <img src={BlogSVG} alt="Bitcoin Icon" style={{ width: 250, height: 250, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
 );
 
-const WalletIcon = ({ isHovered }) => (
-  <img src={ WalletSVG} alt="e-wallet Icon" style={{ width: 300, height: 300, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
+const LearnIcon = ({ isHovered }) => (
+  <img src={LearnSVG} alt="e-wallet Icon" style={{ width: 250, height: 250, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
 );
 
-const RevenueIcon = ({ isHovered }) => (
-  <img src={RevenueSVG} alt="Revenue Icon" style={{ width: 300, height: 300, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
+const ConverterIcon = ({ isHovered }) => (
+  <img src={ConverterSVG} alt="Revenue Icon" style={{ width: 250, height: 250, transform: isHovered ? 'scale(1.1)' : 'scale(1)' }} />
 );
+
+
 
 const ToolsSection = () => {
 
@@ -23,27 +25,31 @@ const ToolsSection = () => {
   const sectionItems = [
     {
       id: 1,
-      icon: <BitcoinIcon isHovered={hoveredItem === 1} />,
-      title:'Explore',
-      sentence: 'Você já se questionou sobre o fascinante mundo das criptomoedas? Bem, aperte o cinto porque estamos prestes embarcar nesta emocionante montanha-russa de informações!',
+      icon: <BlogIcon isHovered={hoveredItem === 1} />,
+      title:'Blog',
+      sentence: 'Você já se questionou sobre o fascinante mundo das criptomoedas? ',
     },
     {
       id: 2,
-      icon: <RevenueIcon isHovered={hoveredItem === 2}/>,
-      title: 'Informe-se',
-      sentence: 'Antes de entrar no mercado cripto, é importante entender o básico. É crucial fazer o seu dever de casa para tomar decisões informadas. Comece familiarizando-se com termos e bom estudo!',
+      icon: <LearnIcon isHovered={hoveredItem === 2}/>,
+      title: 'Aprenda',
+      sentence: 'Antes de entrar no mercado cripto, é importante entender o básico.',
     },
     {
       id: 3,
-      icon: <WalletIcon isHovered={hoveredItem === 3}  />,
-      title:'Decida',
-      sentence: 'Você está pronto para mergulhar no mundo das criptomoedas? Depois de entender o básico, você estará ansioso para decidir se é certo para você. Chegou a hora de explorar a infinidade de criptomoedas disponíveis. Aproveite as oportunidades e previna-se dos riscos!',
+      icon: <ConverterIcon isHovered={hoveredItem === 3}  />,
+      title:'Conversor',
+      sentence: 'O melhor conversor de criptografia: transformando ativos digitais em valor real',
     },
   ];
 
   return (
-    <Box sx={{ flexGrow: 1, minHeight: '400px', py: '10%' }} id='tools'>
+    <Box sx={{ flexGrow: 1, minHeight: '300px', py: '5%', px:'3%' }} id='tools'>
       <Grid container sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+        <Typography variant='h1'>Ferramentas</Typography>
+        <Typography variant="h5" sx={{textAlign: 'center', px:'10%'}} gutterBottom> 
+        Através do nosso blog, trilhas de conhecimento e calculadora conversora de criptomoedas, queremos capacitar nossa comunidade a alcançar a liberdade financeira. Aprenda sobre os conceitos básicos das criptomoedas, como Bitcoin e Ethereum, e descubra como você pode lucrar com esses ativos digitais.
+        </Typography>
         {sectionItems.map((item) => (
           <Grid
             item

@@ -9,3 +9,11 @@
 -   Support of react-script
 -   Code Splitting
 -   CSS-in-JS where CSS is composed using JavaScript instead of defined in external files
+
+## Front-end
+
+yarn start
+
+## Back-end 
+
+yarn run dev

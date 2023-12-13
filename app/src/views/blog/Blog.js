@@ -28,12 +28,11 @@ const sections = [
 ];
 
 const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
+  title: 'Desvendando o Universo das Criptomoedas: Uma Jornada Rumo ao Futuro Financeiro!',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+    "Você já se perguntou como as criptomoedas estão redefinindo o cenário financeiro global? Prepare-se para embarcar em uma jornada fascinante pelo mundo das moedas digitais e descobrir o que o futuro reserva para a nossa economia",
   image: 'https://source.unsplash.com/random?finance',
   imageText: 'main image description',
-  linkText: 'Continue reading…',
 };
 
 // const featuredPosts = [

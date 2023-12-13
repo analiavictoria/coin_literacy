@@ -8,6 +8,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';
 
+
 Chart.register(...registerables);
 
 const currencyDescriptions = {
@@ -117,7 +118,20 @@ const CryptoComparison = () => {
   const chartOptions = {
     scales: {
       y: {
-        beginAtZero: true,
+        min: 1000, // Set the minimum value to 1,000 reais
+        max: 250000, // Set the maximum value to 300,000 reais
+        beginAtZero: false, // Remove this line if you want the y-axis to start from the minimum value
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const label = context.dataset.label || '';
+            const value = context.parsed.y || 0;
+            return `${label}: ${value} ${vsCurrency.toUpperCase()}`;
+          },
+        },
       },
     },
   };
