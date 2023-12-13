@@ -25,7 +25,7 @@ const CryptoCard = ({ title, data }) => {
               <ListItemAvatar>
                 <Avatar alt={item.name} src={item.image} />
               </ListItemAvatar>
-              <ListItemText primary={item.name} secondary={`Preço: ${item.current_price}`} />
+              <ListItemText primary={item.name} secondary={`Preço: $${item.current_price}`} />
             </ListItem>
           ))}
         </List>

@@ -143,7 +143,7 @@ const CryptoComparison = () => {
           <Line data={chartData} options={chartOptions} />
         </div>
         <div style={{ marginTop: '10px' }}>
-          <Typography variant="h5">Escolha a moeda de comparação:</Typography>
+          <Typography variant="h5" sx={{my:2}}>Escolha a moeda de comparação:</Typography>
           <TextField select value={vsCurrency} onChange={handleCurrencyChange} variant="outlined" fullWidth>
             {supportedCurrencies.map((currency) => (
               <MenuItem key={currency} value={currency}>

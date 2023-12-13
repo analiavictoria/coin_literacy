@@ -30,7 +30,7 @@ const Dashboard = () => {
               
               <Grid item lg={6} md={6} sm={6} xs={12}>
                 <SubCard>
-                <Typography variant='h2' marginBottom={5} color="secondary">Comparação de Preços de Criptomoedas (BRL)</Typography>
+                <Typography variant='h2' marginBottom={5} color="secondary">Comparação de Preços entre Criptomoedas</Typography>
                   <CryptoComparison></CryptoComparison>
                 </SubCard>
               </Grid>  

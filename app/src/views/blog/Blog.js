@@ -22,7 +22,7 @@ const banner = {
   title: 'Desvendando o Universo das Criptomoedas: Uma Jornada Rumo ao Futuro Financeiro!',
   description:
   "Você já se perguntou como as criptomoedas estão redefinindo o cenário financeiro global? Prepare-se para embarcar em uma jornada fascinante pelo mundo das moedas digitais e descobrir o que o futuro reserva para a nossa economia.",  
-  image: 'https://source.unsplash.com/random?crypto',
+  image: 'https://source.unsplash.com/random?trading',
   imageText: 'Ethereum',
 };
 
