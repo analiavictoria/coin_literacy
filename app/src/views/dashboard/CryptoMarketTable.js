@@ -2,13 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
+import axios from 'axios';
+
 const CryptoMarket = () => {
   const [cryptoData, setCryptoData] = useState([]);
 
   useEffect(() => {
     const fetchCryptoData = async () => {
       try {
-        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets', {
+        const response = await axios.get('https://api.coingecko.com/api/v3/coins/markets', {
           method: 'GET',
           params: {
             vs_currency: 'usd',
@@ -18,9 +20,8 @@ const CryptoMarket = () => {
             sparkline: false,
           },
         });
-    
-  
-        const data = await response.json();
+        console.log(response)
+        const data = await response.data;
         console.log(data)
         setCryptoData(data || []); // Ensure data is an array or set to an empty array
     
