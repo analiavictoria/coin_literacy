@@ -1,11 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { Toolbar, Typography, Chip } from '@mui/material';
 
 function Header(props) {
   const { sections, title } = props;
@@ -23,9 +19,7 @@ function Header(props) {
         >
           {title}
         </Typography>
-        <IconButton>
-          <SearchIcon />
-        </IconButton>
+        
       </Toolbar>
       <Toolbar
         component="nav"
@@ -33,16 +27,15 @@ function Header(props) {
         sx={{ justifyContent: 'space-between', overflowX: 'auto' }}
       >
         {sections.map((section) => (
-          <Link
-            color="inherit"
-            noWrap
+          <Chip 
+            label={section.title}
             key={section.title}
-            variant="body2"
             href={section.url}
-            sx={{ p: 1, flexShrink: 0 }}
+            variant='outlined'
+            color='secondary'
           >
-            {section.title}
-          </Link>
+
+          </Chip>
         ))}
       </Toolbar>
     </React.Fragment>

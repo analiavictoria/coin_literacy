@@ -90,5 +90,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "immutable": "^4.3.0",
     "sass": "^1.53.0"
+  },
+  "resolutions": {
+    "workbox-webpack-plugin": "6.4.1"
   }
 }

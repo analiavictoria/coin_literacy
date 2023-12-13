@@ -1,24 +1,19 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Card from '@mui/material/Card';
-import CardActionArea from '@mui/material/CardActionArea';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Chip from '@mui/material/Chip';
-
+import {Grid,  CardActionArea, CardContent, CardMedia, Chip} from '@mui/material';
+import SubCard from 'ui-component/cards/SubCard';
 
 function NewsPosts(props) {
   const { post } = props;
 
-  // Split tags string into an array using the pipe character "|"
   const tagsArray = post.tags.split('|');
 
   return (
-    <Grid item xs={12} md={6} lg={6}>
+    
+      <Grid item xs={12} md={6} lg={6}>
       <CardActionArea component="a" href="#">
-        <Card sx={{ display: 'flex', flexDirection: 'column', height: '500px' }}>
+        <SubCard sx={{ display: 'flex', flexDirection: 'column', height: '500px' }}>
           <CardMedia
             component="img"
             sx={{ width: '100%', height: 200, flexShrink: 0 }}
@@ -26,26 +21,24 @@ function NewsPosts(props) {
             alt={post.imageLabel}
           />
           <CardContent sx={{ flex: 1, overflow: 'hidden', height: '100%' }}>
-            <Typography component="h2" variant="h5">
+            <Typography variant="h2" sx={{my:2}}>
               {post.title}
             </Typography>
-            {/* Map over the tagsArray create individual Chip components */}
             {tagsArray.map((tag, index) => (
-              <Chip key={index} label={tag.trim()} variant="outlined" size="small"
-              sx={{
-                color: '#25C998',
-              }} />
+              <Chip key={index} label={tag.trim()} variant="outlined" size="small" color='secondary' sx={{marginRight:1}}/>
             ))}
-            <Typography variant="subtitle1" paragraph>
+            <Typography variant="body2" paragraph sx={{textAlign: 'justify', my:2}}>
               {post.body}
             </Typography>
-            <Typography variant="subtitle1" color="primary">
+            <Typography variant="subtitle1" color="secondary">
               Continuar leitura...
             </Typography>
           </CardContent>
-        </Card>
+        </SubCard>
       </CardActionArea>
     </Grid>
+
+    
   );
 }
 

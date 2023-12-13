@@ -1,22 +1,12 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-
-// material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { Avatar, Box, ButtonBase, Card, Grid, InputAdornment, OutlinedInput, Popper } from '@mui/material';
-
-// third-party
+import { Avatar, Box, ButtonBase, Card, Grid, InputAdornment, OutlinedInput, Popper, Typography } from '@mui/material';
 import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
-
-// project imports
 import Transitions from 'ui-component/extended/Transitions';
-
-// assets
 import { IconSearch, IconX } from '@tabler/icons';
-import { shouldForwardProp } from '@mui/system';
 
-// styles
-const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
+const PopperStyle = styled(Popper)(({ theme }) => ({
   zIndex: 1100,
   width: '99%',
   top: '-55px !important',
@@ -26,7 +16,7 @@ const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
   }
 }));
 
-const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme }) => ({
+const OutlineInputStyle = styled(OutlinedInput)(({ theme }) => ({
   width: 434,
   marginLeft: 16,
   paddingLeft: 16,
@@ -45,7 +35,7 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
   }
 }));
 
-const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => ({
+const HeaderAvatarStyle = styled(Avatar)(({ theme }) => ({
   ...theme.typography.commonAvatar,
   ...theme.typography.mediumAvatar,
   background: theme.palette.secondary.light,
@@ -55,8 +45,6 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
     color: theme.palette.secondary.light
   }
 }));
-
-// ==============================|| SEARCH INPUT - MOBILE||============================== //
 
 const MobileSearch = ({ value, setValue, popupState }) => {
   const theme = useTheme();
@@ -112,11 +100,28 @@ MobileSearch.propTypes = {
   popupState: PopupState
 };
 
-// ==============================|| SEARCH INPUT ||============================== //
-
 const SearchSection = () => {
   const theme = useTheme();
   const [value, setValue] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Substitua esta função pela lógica de pesquisa 
+  //Certifique-se de substituir a função performSearch pela sua lógica de pesquisa real
+  //como chamar uma API para buscar resultados de pesquisa.
+  const performSearch = (query) => {
+    // Simulando uma pesquisa com um filtro simples para fins de demonstração
+    const results = [
+      { name: 'Result 1', description: 'Description for Result 1' },
+      { name: 'Result 2', description: 'Description for Result 2' },
+    ].filter((result) => result.name.toLowerCase().includes(query.toLowerCase()));
+
+    setSearchResults(results);
+  };
+
+  const handleSearch = (query) => {
+    setValue(query);
+    performSearch(query);
+  };
 
   return (
     <>
@@ -147,7 +152,12 @@ const SearchSection = () => {
                         <Box sx={{ p: 2 }}>
                           <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item xs>
-                              <MobileSearch value={value} setValue={setValue} popupState={popupState} />
+                              <MobileSearch value={value} setValue={handleSearch} popupState={popupState} />
+                              {searchResults.map((result, index) => (
+                                <Typography key={index} variant="body2">
+                                  {result.name} - {result.description}
+                                </Typography>
+                              ))}
                             </Grid>
                           </Grid>
                         </Box>
@@ -164,7 +174,7 @@ const SearchSection = () => {
         <OutlineInputStyle
           id="input-search-header"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => handleSearch(e.target.value)}
           placeholder="Search"
           startAdornment={
             <InputAdornment position="start">

@@ -127,7 +127,7 @@ const NotificationSection = () => {
                             <Typography variant="subtitle1">Todas as notificações</Typography>
                             <Chip
                               size="small"
-                              label="01"
+                              label="02"
                               sx={{
                                 color: theme.palette.background.default,
                                 bgcolor: theme.palette.warning.dark
@@ -147,7 +147,6 @@ const NotificationSection = () => {
                         <Grid container direction="column" spacing={2}>
                           <Grid item xs={12}>
                             <Box sx={{ px: 2, pt: 0.25 }}>
-                              
                             </Box>
                           </Grid>
                           <Grid item xs={12} p={0}>

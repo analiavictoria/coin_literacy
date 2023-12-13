@@ -15,7 +15,7 @@ const CryptoMarket = () => {
           params: {
             vs_currency: 'usd',
             order: 'market_cap_desc',
-            per_page: 10,
+            per_page: 5,
             page: 1,
             sparkline: false,
           },
@@ -38,14 +38,14 @@ const CryptoMarket = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Coin</TableCell>
+            <TableCell>Moeda</TableCell>
             <TableCell>Rank</TableCell>
-            <TableCell>Price</TableCell>
+            <TableCell>Preço</TableCell>
             <TableCell>Change % 24h</TableCell>
-            <TableCell>Market Cap</TableCell>
-            <TableCell>Volume 24h</TableCell>
-            <TableCell>Circulating Supply</TableCell>
-            <TableCell>Category</TableCell>
+            <TableCell>Cap. de mercado</TableCell>
+            <TableCell>Volume em 24h</TableCell>
+            <TableCell>Fornecimento Circulante</TableCell>
+            <TableCell>Categoria</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -66,7 +66,7 @@ const CryptoMarket = () => {
     ))
   ) : (
     <TableRow>
-      <TableCell colSpan={8}>Loading...</TableCell>
+      <TableCell colSpan={8}>Carregando...</TableCell>
     </TableRow>
   )}
 </TableBody>

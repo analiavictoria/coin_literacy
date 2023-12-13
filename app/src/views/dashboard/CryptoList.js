@@ -10,16 +10,16 @@ const CryptoList = () => {
   const [selectedCurrency, setSelectedCurrency] = useState('brl');
 
   const currencies = [
-    { label: 'BRL - Real Brasileiro', value: 'brl' },
-    { label: 'USD - Dólar Americano', value: 'usd' },
-    { label: 'EUR - Euro', value: 'eur' },
-    { label: 'JPY - Iene Japonês', value: 'jpy' },
-    { label: 'GBP - Libra Esterlina', value: 'gbp' },
-    { label: 'AUD - Dólar Australiano', value: 'aud' },
-    { label: 'CAD - Dólar Canadense', value: 'cad' },
-    { label: 'CNY - Yuan Chinês', value: 'cny' },
-    { label: 'INR - Rúpia Indiana', value: 'inr' },
-    { label: 'KRW - Won Sul-Coreano', value: 'krw' },
+    { label: 'BRL - Real Brasileiro', value: 'brl', flag: 'https://flagsapi.com/BR/flat/64.png' },
+    { label: 'USD - Dólar Americano', value: 'usd', flag: 'https://flagsapi.com/US/flat/64.png' },
+    { label: 'EUR - Euro', value: 'eur', flag: 'https://flagsapi.com/DE/flat/64.png' },
+    { label: 'JPY - Iene Japonês', value: 'jpy', flag: 'https://flagsapi.com/JP/flat/64.png' },
+    { label: 'GBP - Libra Esterlina', value: 'gbp', flag: 'https://flagsapi.com/GB/flat/64.png' },
+    { label: 'AUD - Dólar Australiano', value: 'aud', flag: 'https://flagsapi.com/AU/flat/64.png' },
+    { label: 'CAD - Dólar Canadense', value: 'cad', flag: 'https://flagsapi.com/CA/flat/64.png' },
+    { label: 'CNY - Yuan Chinês', value: 'cny', flag: 'https://flagsapi.com/CN/flat/64.png' },
+    { label: 'INR - Rúpia Indiana', value: 'inr', flag: 'https://flagsapi.com/IN/flat/64.png' },
+    { label: 'KRW - Won Sul-Coreano', value: 'krw', flag: 'https://flagsapi.com/KR/flat/64.png' },
   ];
 
   useEffect(() => {
@@ -59,17 +59,21 @@ const CryptoList = () => {
   return (
     <div>
       <div>
-        <TextField
-          id="currencySelector"
+        <TextField 
           select
+          id="currencySelector"
           label="Escolha a Moeda"
           value={selectedCurrency}
           onChange={handleCurrencyChange}
           fullWidth
         >
           {currencies.map((currency) => (
+            
             <MenuItem key={currency.value} value={currency.value}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={currency.flag} alt={currency.value} style={{ marginRight: '10px', height: '30px' }} />
               {currency.label}
+              </div> 
             </MenuItem>
           ))}
         </TextField>

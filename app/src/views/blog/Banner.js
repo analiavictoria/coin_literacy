@@ -1,12 +1,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
+import { Paper, Typography, Grid, Link, Box } from '@mui/material';
 
-function MainFeaturedPost(props) {
+
+function Banner(props) {
   const { post } = props;
 
   return (
@@ -22,7 +19,6 @@ function MainFeaturedPost(props) {
         backgroundImage: `url(${post.image})`,
       }}
     >
-      {/* Increase the priority of the hero background image */}
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <Box
         sx={{
@@ -31,7 +27,8 @@ function MainFeaturedPost(props) {
           bottom: 0,
           right: 0,
           left: 0,
-          backgroundColor: 'rgba(0,0,0,.3)',
+          backgroundColor: 'rgba(0,0,0,.5)',
+          borderRadius:'10px'
         }}
       />
       <Grid container>
@@ -39,14 +36,14 @@ function MainFeaturedPost(props) {
           <Box
             sx={{
               position: 'relative',
-              p: { xs: 3, md: 6 },
+              p: { xs: 3, md: 10 },
               pr: { md: 0 },
             }}
           >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+            <Typography variant="h2" color="inherit" gutterBottom>
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
+            <Typography variant="subtitle3" color="inherit" paragraph sx={{textAlign:'justify'}}>
               {post.description}
             </Typography>
             <Link variant="subtitle1" href="#">
@@ -59,7 +56,7 @@ function MainFeaturedPost(props) {
   );
 }
 
-MainFeaturedPost.propTypes = {
+Banner.propTypes = {
   post: PropTypes.shape({
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
@@ -69,4 +66,4 @@ MainFeaturedPost.propTypes = {
   }).isRequired,
 };
 
-export default MainFeaturedPost;
+export default Banner;
