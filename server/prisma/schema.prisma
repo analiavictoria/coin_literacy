@@ -24,7 +24,7 @@ model User {
 
 model BlogPosts {
   id               String   @id @default(uuid()) @map("_id")
-  imageBlog        Bytes?
+  imageBlog        String
   categoryBlogPost String
   title            String @unique
   text             String

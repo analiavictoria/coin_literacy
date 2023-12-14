@@ -14,7 +14,7 @@ interface CustomRequest extends FastifyRequest {
 
 interface BlogPost {
     categoryPost : string;
-    imageBlogPost : any;
+    imageBlogPost : string;
     title : string;
     text : string;
     youtube_url? : string;
@@ -24,7 +24,7 @@ interface BlogPost {
 interface BlogPostUpdate {
     id : string;
     categoryPost? : string;
-    imageBlogPost? : any;
+    imageBlogPost? : string;
     title? : string;
     text? : string;
     youtube_url? : string;

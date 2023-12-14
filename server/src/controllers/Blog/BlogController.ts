@@ -21,30 +21,12 @@ export class BlogPostController {
             const createBlogPostBody = z.object({
                 categoryPost : z.string(),
                 title : z.string(),
+                imageBlogPost : z.string(),
                 text : z.string(),
                 url : z.string(),
             });
-
-            const parts = req.parts()
-            let  imageBlogPost
-            let values : string[] = []
-
-            for await (const part of parts) {
-                if (part.type == "file"){
-                    imageBlogPost = await part.toBuffer()
-                }else if (part.type == "field"){
-                    values.push(part.value)
-                }
-            }
-
-            let fields = {
-                "categoryPost" : values[0],
-                "title" : values[1],
-                "text" : values[2],
-                "url" : values[3]
-            }
             
-            const { categoryPost, title, text, url } = createBlogPostBody.parse(fields);
+            const { categoryPost, imageBlogPost, title, text, url } = createBlogPostBody.parse(req.body);
 
             const author_email  = req.user.email
 
