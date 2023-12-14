@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import { Card, CardContent, MenuItem, TextField, Typography } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';
@@ -27,7 +23,7 @@ const currencyDescriptions = {
 const currencyImages = {
   brl: 'https://flagsapi.com/BR/flat/64.png',
   usd: 'https://flagsapi.com/US/flat/64.png',
-  eur: 'https://flagsapi.com/EU/flat/64.png',
+  eur: 'https://flagsapi.com/DE/flat/64.png',
   jpy: 'https://flagsapi.com/JP/flat/64.png',
   gbp: 'https://flagsapi.com/GB/flat/64.png',
   aud: 'https://flagsapi.com/AU/flat/64.png',
@@ -147,15 +143,17 @@ const CryptoComparison = () => {
           <Line data={chartData} options={chartOptions} />
         </div>
         <div style={{ marginTop: '10px' }}>
-          <Typography variant="body2">Escolha a moeda de comparação:</Typography>
-          <Select value={vsCurrency} onChange={handleCurrencyChange} variant="outlined" fullWidth>
+          <Typography variant="h5" sx={{my:2}}>Escolha a moeda de comparação:</Typography>
+          <TextField select value={vsCurrency} onChange={handleCurrencyChange} variant="outlined" fullWidth>
             {supportedCurrencies.map((currency) => (
               <MenuItem key={currency} value={currency}>
-                <img src={currencyImages[currency]} alt={currency} style={{ marginRight: '10px', height: '20px' }} />
-                {`${currency.toUpperCase()} - ${currencyDescriptions[currency]}` }
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <img src={currencyImages[currency]} alt={currency} style={{ marginRight: '10px', height: '30px' }} />
+                  <span>{`${currency.toUpperCase()} - ${currencyDescriptions[currency]}`}</span>
+                </div>
               </MenuItem>
             ))}
-          </Select>
+          </TextField>
         </div>
       </CardContent>
     </Card>

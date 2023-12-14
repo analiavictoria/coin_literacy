@@ -15,7 +15,7 @@ import {
 
 // assets
 import { IconMailbox, IconUserPlus } from '@tabler/icons';
-import User1 from 'assets/images/users/user-round.svg';
+// import User1 from 'assets/images/users/user-round.svg';
 
 // styles
 const ListItemWrapper = styled('div')(({ theme }) => ({
@@ -38,18 +38,18 @@ const NotificationList = () => {
     height: 24,
     padding: '0 6px'
   };
-  const chipErrorSX = {
-    ...chipSX,
-    color: theme.palette.orange.dark,
-    backgroundColor: theme.palette.orange.light,
-    marginRight: '5px'
-  };
+  // const chipErrorSX = {
+  //   ...chipSX,
+  //   color: theme.palette.orange.dark,
+  //   backgroundColor: theme.palette.orange.light,
+  //   marginRight: '5px'
+  // };
 
-  const chipWarningSX = {
-    ...chipSX,
-    color: theme.palette.warning.dark,
-    backgroundColor: theme.palette.warning.light
-  };
+  // const chipWarningSX = {
+  //   ...chipSX,
+  //   color: theme.palette.warning.dark,
+  //   backgroundColor: theme.palette.warning.light
+  // };
 
   const chipSuccessSX = {
     ...chipSX,
@@ -82,40 +82,6 @@ const NotificationList = () => {
       <ListItemWrapper>
         <ListItem alignItems="center">
           <ListItemAvatar>
-            <Avatar alt="José Maria" src={User1} />
-          </ListItemAvatar>
-          <ListItemText primary="José Maria" />
-          <ListItemSecondaryAction>
-            <Grid container justifyContent="flex-end">
-              <Grid item xs={12}>
-                <Typography variant="caption" display="block" gutterBottom>
-                  2 min atrás
-                </Typography>
-              </Grid>
-            </Grid>
-          </ListItemSecondaryAction>
-        </ListItem>
-        <Grid container direction="column" className="list-container">
-          <Grid item xs={12} sx={{ pb: 2 }}>
-            <Typography variant="subtitle2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. </Typography>
-          </Grid>
-          <Grid item xs={12}>
-            <Grid container>
-              <Grid item>
-                <Chip label="Não lido" sx={chipErrorSX} />
-              </Grid>
-              <Grid item>
-                <Chip label="Novo" sx={chipWarningSX} />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </ListItemWrapper>
-      
-      <Divider />
-      <ListItemWrapper>
-        <ListItem alignItems="center">
-          <ListItemAvatar>
             <Avatar
               sx={{
                 color: theme.palette.primary.dark,
@@ -132,7 +98,7 @@ const NotificationList = () => {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Typography variant="caption" display="block" gutterBottom>
-                  5 min atrás
+                  2 min atrás
                 </Typography>
               </Grid>
             </Grid>
@@ -171,7 +137,7 @@ const NotificationList = () => {
             <Grid container justifyContent="flex-end">
               <Grid item xs={12}>
                 <Typography variant="caption" display="block" gutterBottom>
-                  10 min ago
+                  3 min atrás
                 </Typography>
               </Grid>
             </Grid>

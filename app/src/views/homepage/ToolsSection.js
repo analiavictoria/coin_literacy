@@ -27,19 +27,19 @@ const ToolsSection = () => {
       id: 1,
       icon: <BlogIcon isHovered={hoveredItem === 1} />,
       title:'Blog',
-      sentence: 'Você já se questionou sobre o fascinante mundo das criptomoedas? ',
+      sentence: 'Descubra notícias, tendências e insights profundos sobre criptomoedas e blockchain em nosso blog especializado',
     },
     {
       id: 2,
       icon: <LearnIcon isHovered={hoveredItem === 2}/>,
       title: 'Aprenda',
-      sentence: 'Antes de entrar no mercado cripto, é importante entender o básico.',
+      sentence: 'Com nossas poderosas ferramentas de aprendizado explore, entenda e invista com confiança!',
     },
     {
       id: 3,
       icon: <ConverterIcon isHovered={hoveredItem === 3}  />,
       title:'Conversor',
-      sentence: 'O melhor conversor de criptografia: transformando ativos digitais em valor real',
+      sentence: 'Conheça o melhor conversor de criptomoedas: transformando ativos digitais em valores reai$',
     },
   ];
 
@@ -48,7 +48,7 @@ const ToolsSection = () => {
       <Grid container sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
         <Typography variant='h1'>Ferramentas</Typography>
         <Typography variant="h5" sx={{textAlign: 'center', px:'10%'}} gutterBottom> 
-        Através do nosso blog, trilhas de conhecimento e calculadora conversora de criptomoedas, queremos capacitar nossa comunidade a alcançar a liberdade financeira. Aprenda sobre os conceitos básicos das criptomoedas, como Bitcoin e Ethereum, e descubra como você pode lucrar com esses ativos digitais.
+        Através do nosso blog, fontes de conhecimento e calculadora conversora de criptomoedas, queremos capacitar nossa comunidade para alcançar a liberdade financeira. Aprenda sobre os conceitos básicos das criptomoedas, como Bitcoin e Ethereum, e descubra como você pode lucrar com esses ativos digitais.
         </Typography>
         {sectionItems.map((item) => (
           <Grid

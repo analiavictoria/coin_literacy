@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom';
-import { Grid, Typography } from '@mui/material';
-import SubCard from 'ui-component/cards/SubCard';
+import React from 'react';
+import { Grid } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
-import { gridSpacing } from 'store/constant';
+import SubCard from 'ui-component/cards/SubCard';
 import YouTube from 'react-youtube';
+import Crypto101 from './Crypto101';
+import Glossary from './Glossary';
+import { gridSpacing } from 'store/constant';
 
 const Aprenda = () => {
   const videoOptions = {
@@ -14,37 +16,23 @@ const Aprenda = () => {
     },
   };
 
-  const BlockchainVideoId = '9JWCAbVTMlY'; 
+  const blockchainVideoId = '9JWCAbVTMlY';
 
   return (
     <MainCard title="Coin literacy explica:">
       <Grid container spacing={gridSpacing}>
-        <Grid item xs={12} sm={6}>
-          <Link to="/cripto-101">
-            <SubCard title="Cripto 101: dando os primeiros passos" summary="Um guia introdutório sobre o mundo das criptomoedas.">
-              <Typography variant="body2">Conteúdo adicional aqui, se necessário.</Typography>
-            </SubCard>
-          </Link>
+        <Grid item xs={12} sm={6} lg={4}>
+          <Crypto101 />
         </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <SubCard title="O que é blockchain?">
-            {/* Conteúdo do SubCard */}
-          </SubCard>
+        <Grid item xs={12} sm={6} lg={4}>
+          <Glossary />
         </Grid>
-
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} lg={4}>
           <SubCard title="Bitcoin: conheça a primeira criptomoeda">
-            <YouTube videoId={BlockchainVideoId} opts={videoOptions} />
+            <YouTube videoId={blockchainVideoId} opts={videoOptions} />
           </SubCard>
         </Grid>
-
-        <Grid item xs={12} sm={6}>
-          <SubCard title="Dicionário do cripto">
-            {/* Conteúdo do SubCard */}
-          </SubCard>
-        </Grid>
-      </Grid>  
+      </Grid>
     </MainCard>
   );
 };

@@ -3,7 +3,6 @@ import axios from 'axios';
 import { FormControl, MenuItem, TextField, Typography, Box, InputAdornment } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import BannerImage from './Coin Literacy Conversor.png'
-import ReactCountryFlag from "react-country-flag"
 
 
 function Conversor() {
@@ -32,11 +31,12 @@ function Conversor() {
     }
   }, [cripto, fiat, valorCripto]);
 
+  
   return (
     <Box
     component="form"
     sx={{
-      '& .MuiTextField-root': { m: 1, width: '25ch' },
+      '& .MuiTextField-root': { m: 1, width: '35ch'},
     }}
     >
       <MainCard>
@@ -69,11 +69,8 @@ function Conversor() {
 
         <FormControl>
           <TextField select label="Moeda fiduciária*" value={fiat} onChange={(e) => setFiat(e.target.value)}>
-          <MenuItem value="brl">
-            <ReactCountryFlag countryCode="BR" svg style={{ width: '2em', height: '2em', paddingRight:'10px' }}
-            />Real Brasileiro (BRL)
-            </MenuItem>
-            <MenuItem value="usd">Dólar Americano (USD)</MenuItem>
+          <MenuItem value="brl"> Real Brasileiro (BRL)</MenuItem>
+            <MenuItem value="usd"> Dólar Americano (USD)</MenuItem>
             <MenuItem value="eur">Euro (EUR)</MenuItem>
             <MenuItem value="gbp">Libra Esterlina (GBP)</MenuItem>
             <MenuItem value="jpy">Iene Japonês (JPY)</MenuItem>

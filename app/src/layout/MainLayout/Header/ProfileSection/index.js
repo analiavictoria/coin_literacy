@@ -62,6 +62,24 @@ const ProfileSection = () => {
     setOpen((prevOpen) => !prevOpen);
   };
 
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const getCurrentTime = () => {
+      const currentHour = new Date().getHours();
+
+      if (currentHour >= 5 && currentHour < 12) {
+        setGreeting('Bom dia');
+      } else if (currentHour >= 12 && currentHour < 18) {
+        setGreeting('Boa tarde');
+      } else {
+        setGreeting('Boa noite');
+      }
+    };
+
+    getCurrentTime();
+  }, []);
+
   const prevOpen = useRef(open);
   useEffect(() => {
     if (prevOpen.current === true && open === false) {
@@ -141,9 +159,9 @@ const ProfileSection = () => {
                   <Box sx={{ p: 2 }}>
                     <Stack>
                       <Stack direction="row" alignItems="center" margin={2}>
-                        <Typography variant="h4">Boa noite,</Typography>
+                        <Typography variant="h4">{greeting},&nbsp;</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                          José Maria
+                           José Maria
                         </Typography>
                       </Stack>
                     </Stack>
