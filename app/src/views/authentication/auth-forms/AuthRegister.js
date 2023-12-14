@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import api from '../../../api/api';
+// import api from '../../../api/api';
 import { useNavigate } from 'react-router-dom';
-
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import {
@@ -88,9 +87,10 @@ const FirebaseRegister = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            console.log(JSON.stringify(values));
+            console.log(JSON.stringify(values))
             const response = await api.post('/user',values);
             console.log(response);
+
             navigate('/login');
             if (scriptedRef.current) {
               setStatus({ success: true });

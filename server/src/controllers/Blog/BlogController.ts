@@ -35,8 +35,6 @@ export class BlogPostController {
 
             const post_fields = {categoryPost, imageBlogPost, title, text, id, author_email}
 
-            console.log(post_fields)
-
             const post = await BlogPostService.CreateBlogPost(post_fields)
             
             return res.status(201).send({ message: 'Post to Blog created succesfully', post}); 
