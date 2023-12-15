@@ -14,7 +14,7 @@ interface CustomRequest extends FastifyRequest {
 
 interface BlogPost {
     categoryPost : string;
-    imageBlog : string;
+    imageBlogPost : string;
     title : string;
     text : string;
     description : string;
@@ -25,7 +25,7 @@ interface BlogPost {
 interface BlogPostUpdate {
     id : string;
     categoryPost? : string;
-    imageBlog? : string;
+    imageBlogPost? : string;
     title? : string;
     description? : string;
     text? : string;
@@ -53,7 +53,7 @@ export class BlogPostServices {
             const blogPost = await prisma.blogPosts.create({
                 data  : { 
                     categoryBlogPost : post.categoryPost,
-                    imageBlog : post.imageBlog,
+                    imageBlog : post.imageBlogPost,
                     title: post.title,
                     description : post.description,
                     text: post.text,
@@ -103,7 +103,7 @@ export class BlogPostServices {
             }, data : {
                 title : blogPostUpdate.title,
                 text : blogPostUpdate.text,
-                imageBlog : blogPostUpdate.imageBlog,
+                imageBlog : blogPostUpdate.imageBlogPost,
                 youtube_url : blogPostUpdate.youtube_url
             }
         })

@@ -21,20 +21,20 @@ export class BlogPostController {
             const createBlogPostBody = z.object({
                 categoryPost : z.string(),
                 title : z.string(),
-                imageBlog : z.string(),
+                imageBlogPost : z.string(),
                 text : z.string(),
                 description: z.string(),
                 url : z.string(),
             });
             
-            const { categoryPost, imageBlog, title, description, text, url } = createBlogPostBody.parse(req.body);
+            const { categoryPost, imageBlogPost, title, description, text, url } = createBlogPostBody.parse(req.body);
 
             const author_email  = req.user.email
 
             const [ rest, id ] = url.split('=') 
  
 
-            const post_fields = {categoryPost, imageBlog, title, text, description, id, author_email}
+            const post_fields = {categoryPost, imageBlogPost, title, text, description, id, author_email}
 
             const post = await BlogPostService.CreateBlogPost(post_fields)
             
@@ -87,7 +87,7 @@ export class BlogPostController {
                 categoryPost : z.string().optional(),
                 title : z.string().optional(),
                 text : z.string().optional(),
-                imageBlog : z.string().optional(),
+                imageBlogPost: z.string().optional(),
                 youtube_url : z.string().optional(),
             });
     
@@ -95,13 +95,13 @@ export class BlogPostController {
                 id : z.string().uuid(),
             });    
     
-            const { categoryPost, title, text, imageBlog, youtube_url } = createBlogPostBody.parse(req.body);
+            const { categoryPost, title, text, imageBlogPost, youtube_url } = createBlogPostBody.parse(req.body);
          
             const { id } = blogPostParam.parse(req.params);
 
             const author_email  = req.user.email
 
-            const blogPostUpdate = { id, categoryPost, text, imageBlog, youtube_url, title, author_email}
+            const blogPostUpdate = { id, categoryPost, text, imageBlogPost, youtube_url, title, author_email}
             
             const blogPostUpdated = await BlogPostService.UpdateBlogPost(blogPostUpdate)
             
