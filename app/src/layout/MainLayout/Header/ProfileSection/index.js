@@ -22,7 +22,7 @@ import {
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
-import User1 from 'assets/images/users/user-round.svg';
+import User1 from 'assets/images/users/nico_round.png';
 import { Context } from '../../../../context/AuthContext';
 // assets
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
@@ -162,7 +162,7 @@ const ProfileSection = () => {
                       <Stack direction="row" alignItems="center" margin={2}>
                         <Typography variant="h4">{greeting},&nbsp;</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                           José Maria
+                           Nicholas
                         </Typography>
                       </Stack>
                     </Stack>

@@ -13,13 +13,6 @@ const resources = {
   type: 'group',
   children: [
     {
-      id: 'tool',
-      title: 'Conversor de criptomoedas',
-      type: 'item',
-      icon: icons.IconTools,
-      url: '/recursos/conversor',
-    },
-    {
       id: 'learn',
       title: 'Aprenda',
       type: 'item',
@@ -28,12 +21,11 @@ const resources = {
       breadcrumbs: true
     },
     {
-      id: 'forum',
-      title: 'Fórum',
+      id: 'tool',
+      title: 'Conversor de criptomoedas',
       type: 'item',
-      url: '/recursos/forum',
-      icon: icons.IconMessages,
-      breadcrumbs: true
+      icon: icons.IconTools,
+      url: '/recursos/conversor',
     },
   ]
 };

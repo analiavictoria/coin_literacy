@@ -4,22 +4,20 @@ import PropTypes from 'prop-types';
 import { Toolbar, Typography, Chip } from '@mui/material';
 
 function Header(props) {
-  const { sections, title } = props;
+  const { sections } = props;
 
   return (
     <React.Fragment>
       <Toolbar sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
+          variant="h1"
+          color="primary"
           align="center"
           noWrap
           sx={{ flex: 1 }}
         >
-          {title}
+          Blog
         </Typography>
-        
       </Toolbar>
       <Toolbar
         component="nav"

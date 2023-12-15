@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Typography, Grid, CardActionArea,  CardContent, CardMedia} from '@mui/material';
+import { Typography, Grid, CardActionArea,  CardContent, CardMedia, Chip} from '@mui/material';
 import SubCard from 'ui-component/cards/SubCard';
 
 
@@ -17,19 +17,27 @@ export default function FeaturedPost(props: FeaturedPostProps) {
             alt={post.imageLabel}
           />
         
-          <CardContent sx={{ flex: 1, height:'16.75rem'  }}>
+          <CardContent sx={{ flex: 1, height:'23.75rem'  }}>
             <Typography variant="h3" sx={{textAlign: 'center'}}>
               {post.title}
             </Typography>
-            <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+            <Typography variant="subtitle1" color="text.secondary" sx={{textAlign: 'center'}}>
+              {post.created_at}
             </Typography>
-            <Typography variant="body2" sx={{textAlign: 'justify'}} paragraph>
+            <Chip 
+            label={post.categoryBlogPost} 
+            sx={{my:1}} 
+            variant='outlined'
+            color='secondary'
+            size='small'>
+            </Chip>
+            <Typography variant="body2" sx={{textAlign: 'justify', textOverflow: 'ellipsis'}} paragraph>
               {post.description}
             </Typography>
             <Typography variant="subtitle1" color="secondary">
               Continuar lendo...
             </Typography>
+            
           </CardContent>
     
       </CardActionArea>

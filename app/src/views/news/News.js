@@ -1,15 +1,16 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
+import { Grid, Container, Typography, Divider } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import NewsPosts from './NewsPosts';
 import axios from 'axios';
 
 
+
 export default function News() {
   const [cryptoNews, setCryptoNews] = useState([]);
+  
 
   useEffect(() => {
     const fetchCryptoData = async () => {
@@ -29,7 +30,17 @@ export default function News() {
 
   return (
     <MainCard>
-      <Container maxWidth="lg">
+      <Container>
+        <Typography
+          noWrap
+          variant="h1"
+          color="primary"
+          align="center"
+          sx={{ flex: 1, my:1 }}
+        >
+         Notícias
+        </Typography>
+        <Divider sx={{m:2}}></Divider>
           <Grid container spacing={4}>
             {cryptoNews.map((post) => (
               <NewsPosts key={post.title} post={post} />

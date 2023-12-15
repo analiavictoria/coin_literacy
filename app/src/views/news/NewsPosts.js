@@ -1,18 +1,18 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
-import {Grid,  CardActionArea, CardContent, CardMedia, Chip} from '@mui/material';
+import { Grid, CardActionArea, CardContent, CardMedia, Chip } from '@mui/material';
 import SubCard from 'ui-component/cards/SubCard';
 
 function NewsPosts(props) {
   const { post } = props;
 
   const tagsArray = post.tags.split('|');
+  const displayedTags = tagsArray.slice(0, 3);
 
   return (
-    
-      <Grid item xs={12} md={6} lg={6}>
-      <CardActionArea component="a" href="#">
+    <Grid item xs={12} md={6} lg={6}>
+      <CardActionArea>
         <SubCard sx={{ display: 'flex', flexDirection: 'column', height: '500px' }}>
           <CardMedia
             component="img"
@@ -20,25 +20,23 @@ function NewsPosts(props) {
             src={post.imageurl}
             alt={post.imageLabel}
           />
-          <CardContent sx={{ flex: 1, overflow: 'hidden', height: '100%' }}>
-            <Typography variant="h2" sx={{my:2}}>
+          <CardContent sx={{ height: '100%' }}>
+            <Typography variant="h2" sx={{ my:2, textAlign: 'left', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>
               {post.title}
             </Typography>
-            {tagsArray.map((tag, index) => (
-              <Chip key={index} label={tag.trim()} variant="outlined" size="small" color='secondary' sx={{marginRight:1}}/>
+            {displayedTags.map((tag, index) => (
+              <Chip key={index} label={tag.trim()} variant="outlined" size="small" color="secondary" sx={{ marginRight: 1, marginBottom: 1 }} />
             ))}
-            <Typography variant="body2" paragraph sx={{textAlign: 'justify', my:2}}>
+            <Typography variant="body2" paragraph sx={{ textAlign: 'justify', overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 3 }}>
               {post.body}
             </Typography>
-            <Typography variant="subtitle1" color="secondary">
+            <Typography variant="subtitle1" color="secondary" component="a" href="#" sx={{my:2}}>
               Continuar leitura...
             </Typography>
           </CardContent>
         </SubCard>
       </CardActionArea>
     </Grid>
-
-    
   );
 }
 

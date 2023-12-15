@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Typography, Grid, Link, Box } from '@mui/material';
+import { Paper, Typography, Grid, Box } from '@mui/material';
 
 
 function Banner(props) {
@@ -46,9 +46,6 @@ function Banner(props) {
             <Typography variant="subtitle3" color="inherit" paragraph sx={{textAlign:'justify'}}>
               {post.description}
             </Typography>
-            <Link variant="subtitle1" href="#">
-              {post.linkText}
-            </Link>
           </Box>
         </Grid>
       </Grid>
@@ -61,7 +58,6 @@ Banner.propTypes = {
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     imageText: PropTypes.string.isRequired,
-    linkText: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
   }).isRequired,
 };

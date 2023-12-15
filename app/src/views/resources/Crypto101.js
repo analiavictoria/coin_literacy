@@ -10,19 +10,46 @@ const Crypto101 = () => (
     <br />
     <br />
     <Typography variant='h5'>
-    O que são Criptomoedas?
+    Compreendendo o básico: O que são Criptomoedas?
     </Typography>
     <br />
-    Em termos simples, criptomoedas são formas de dinheiro digital que utilizam a criptografia para garantir transações seguras e para controlar a criação de novas unidades. A mais famosa delas é o Bitcoin, mas há muitas outras, como Ethereum, Ripple e Litecoin.
+    Em termos simples, criptomoedas são formas de dinheiro digital que utilizam a criptografia para garantir transações seguras e para controlar a criação de novas unidades. Diferentemente das moedas tradicionais, as criptomoedas operam em uma tecnologia descentralizada chamada blockchain, que é um registro público e imutável de todas as transações.
     <br />
     <br />
     <Typography variant='h5'>
-    Por onde Começar?
+    Escolhendo a criptomoeda certa: Bitcoin e Além
     </Typography>
     <br />
-    Antes de começar a investir ou utilizar criptomoedas, é importante entender alguns conceitos básicos. Primeiramente, familiarize-se com a ideia de blockchain, que é o sistema que sustenta a maioria das criptomoedas. 
+    O Bitcoin, a primeira e mais conhecida criptomoeda, é um ponto de partida comum. Contudo, o universo das criptomoedas é vasto, e você pode explorar altcoins como Ethereum, Ripple e Litecoin. Cada uma tem suas características únicas, propósitos e tecnologias subjacentes.
+    <br />
+    <br />
+    <Typography variant='h5'>
+    Selecionando uma Exchange: Onde Comprar e Vender
     </Typography>
-    
+    <br />
+    Para adquirir criptomoedas, você precisará de uma plataforma de negociação, conhecida como exchange. Exemplos populares incluem Coinbase, Binance e Kraken. Escolha uma exchange confiável, verifique as taxas associadas e siga os procedimentos de segurança recomendados.
+    <br />
+    <br />
+    <Typography variant='h5'>
+    Carteiras Digitais: Armazenando com Segurança
+    </Typography>
+    <br />
+    Após comprar suas criptomoedas, é crucial armazená-las de forma segura. As carteiras digitais são projetadas para esse fim. Carteiras como Ledger Nano S e Trezor oferecem um nível extra de segurança, mantendo suas chaves privadas offline.
+    <br />
+    <br />
+    <Typography variant='h5'>
+    Educação Contínua: Mantenha-se Informado
+    </Typography>
+    <br />
+    O mercado de criptomoedas é dinâmico, com mudanças frequentes. Mantenha-se informado através de fontes confiáveis, como blogs, podcasts e sites de notícias especializados. Compreender as tendências do mercado e as atualizações tecnológicas é fundamental para tomar decisões informadas.
+    <br />
+    <br />
+    <Typography variant='h5'>
+    Conclusão: Seu Jornada nas Criptomoedas Começa Agora
+    </Typography>
+    <br />
+    Ao seguir essas orientações, você está pronto para dar seus primeiros passos no emocionante mundo das criptomoedas. Lembre-se de que a jornada é contínua, e a educação constante é a chave para o sucesso. Seja curioso, esteja ciente dos riscos e aproveite a revolução financeira digital que está apenas começando.
+    </Typography>
   </SubCard>
 );
 

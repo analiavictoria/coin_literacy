@@ -6,6 +6,7 @@ import {
   CardContent,
   Typography,
   Box,
+  Divider
 } from '@mui/material';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import SendIcon from '@mui/icons-material/Send';
@@ -17,7 +18,7 @@ const Forum = ({ posts, setPosts }) => {
   const [comments, setComments] = useState({});
   const [newComment, setNewComment] = useState('');
   const [selectedPost, setSelectedPost] = useState(null);
-  const [underConstruction, setUnderConstruction] = useState(true); // Set to true to enable construction mode
+  const [underConstruction, setUnderConstruction] = useState(true); // Setar para true para habilitar o modo em construção
 
   const handlePostSubmit = () => {
     const postId = posts.length;
@@ -73,11 +74,18 @@ const Forum = ({ posts, setPosts }) => {
 
       <MainCard style={{ filter: underConstruction ? 'blur(5px)' : 'none' }}>
         <div style={{ maxWidth: '800px', margin: '20px auto' }}>
-          <Typography variant="h4" gutterBottom>
-            Forum
-          </Typography>
+        <Typography
+          noWrap
+          variant="h1"
+          color="primary"
+          align="center"
+          sx={{ flex: 1, my:1 }}
+        >
+         Fórum
+        </Typography>
+        <Divider sx={{m:2}}></Divider>
           <TextField
-            label="New Post"
+            label="Nova postagem"
             fullWidth
             multiline
             value={newPost}
@@ -86,12 +94,13 @@ const Forum = ({ posts, setPosts }) => {
           />
           <Button
             variant="contained"
-            color="primary"
+            size="small"
+            color="secondary"
             onClick={handlePostSubmit}
             style={{ marginTop: '10px' }}
             endIcon={<SendIcon />}
           >
-            Post
+            Enviar
           </Button>
           <div style={{ marginTop: '20px' }}>
             {posts.map((post) => (
@@ -99,13 +108,14 @@ const Forum = ({ posts, setPosts }) => {
                 <CardContent>
                   <Typography variant="body1">{post.content}</Typography>
                   <Button
+                    size="small"
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     onClick={() => setSelectedPost(post.id)}
                     style={{ marginTop: '10px' }}
                     endIcon={<ModeCommentIcon />}
                   >
-                    Add Comment
+                    Comentar
                   </Button>
                   {selectedPost === post.id && (
                     <div style={{ marginTop: '15px' }}>
@@ -118,11 +128,12 @@ const Forum = ({ posts, setPosts }) => {
                       />
                       <Button
                         variant="contained"
-                        color="primary"
+                        size="small"
+                        color="secondary"
                         onClick={handleCommentSubmit}
                         style={{ marginTop: '10px' }}
                       >
-                        Comment
+                        Enviar
                       </Button>
                       <div style={{ marginTop: '15px' }}>
                         {comments[post.id].map((comment, index) => (
