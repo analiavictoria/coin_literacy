@@ -1,7 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useTheme } from '@mui/material/styles';
-import api from '../../../api/api';
-import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -19,6 +17,9 @@ import {
   Typography,
 } from '@mui/material';
 
+//Login context
+import { Context } from '../../../context/AuthContext';
+
 // third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
@@ -35,10 +36,10 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   const [checked, setChecked] = useState(true);
+  const { handleLogin } = useContext(Context);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -71,12 +72,8 @@ const FirebaseLogin = ({ ...others }) => {
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
           try {
-            const response = await api.post('login', values)
-            if (response.status == 200) {
-              navigate("/dashboard");
-              setStatus({ success: true });
-              setSubmitting(true);
-            }
+            console.log(values);
+            handleLogin(values.email, values.password)
           } catch (err) {
             if (scriptedRef.current) {
               setStatus({ success: false });

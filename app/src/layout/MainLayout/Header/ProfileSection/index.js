@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTheme } from '@mui/material/styles';
@@ -23,7 +23,7 @@ import {
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import User1 from 'assets/images/users/user-round.svg';
-
+import { Context } from '../../../../context/AuthContext';
 // assets
 import { IconLogout, IconSettings, IconUser } from '@tabler/icons';
 
@@ -37,10 +37,11 @@ const ProfileSection = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
+  const { handleLogout } = useContext(Context);
   
-  const handleLogout = async () => {
+  const handleLogoutFunction = async () => {
     console.log('Logout');
-    navigation.navigate('/')
+    handleLogout()
   };
 
   const handleClose = (event) => {
@@ -225,7 +226,7 @@ const ProfileSection = () => {
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 4}
-                          onClick={handleLogout}
+                          onClick={handleLogoutFunction}
                         >
                           <ListItemIcon>
                             <IconLogout stroke={1.5} size="1.3rem" />

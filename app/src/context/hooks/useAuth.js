@@ -11,7 +11,7 @@ export default function useAuth() {
   useEffect(() => {
     const token = localStorage.getItem('token');
 
-    if (token) {
+    if(token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token)}`;
       setAuthenticated(true);
     }
@@ -22,9 +22,9 @@ export default function useAuth() {
   async function handleLogin( email, password ) {
     const userCredentials = { email, password };
     const response = await api.post('/login',userCredentials);
-    const token = response.data.token;
+    const token = response.data.Token;
     localStorage.setItem('token', JSON.stringify(token));
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.authorization = `Bearer ${token}`;
     setAuthenticated(true);
     navigate('/dashboard');
   }

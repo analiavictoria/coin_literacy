@@ -23,17 +23,18 @@ export class BlogPostController {
                 title : z.string(),
                 imageBlogPost : z.string(),
                 text : z.string(),
+                description: z.string(),
                 url : z.string(),
             });
             
-            const { categoryPost, imageBlogPost, title, text, url } = createBlogPostBody.parse(req.body);
+            const { categoryPost, imageBlogPost, title, description, text, url } = createBlogPostBody.parse(req.body);
 
             const author_email  = req.user.email
 
             const [ rest, id ] = url.split('=') 
+ 
 
-
-            const post_fields = {categoryPost, imageBlogPost, title, text, id, author_email}
+            const post_fields = {categoryPost, imageBlogPost, title, text, description, id, author_email}
 
             const post = await BlogPostService.CreateBlogPost(post_fields)
             

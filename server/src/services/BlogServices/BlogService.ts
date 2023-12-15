@@ -17,6 +17,7 @@ interface BlogPost {
     imageBlogPost : string;
     title : string;
     text : string;
+    description : string;
     youtube_url? : string;
     author_email : string;
 }
@@ -26,6 +27,7 @@ interface BlogPostUpdate {
     categoryPost? : string;
     imageBlogPost? : string;
     title? : string;
+    description? : string;
     text? : string;
     youtube_url? : string;
     author_email? : string;
@@ -53,6 +55,7 @@ export class BlogPostServices {
                     categoryBlogPost : post.categoryPost,
                     imageBlog : post.imageBlogPost,
                     title: post.title,
+                    description : post.description,
                     text: post.text,
                     created_at : today,
                     youtube_url : post.youtube_url,

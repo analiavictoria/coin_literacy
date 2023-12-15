@@ -89,9 +89,8 @@ export class UserController {
             const { email, password } = loginUserBody.parse(req.body);
             const login = { email, password }
             const token = await userService.loginUser(login)
-            
             // Retorne o token como resposta
-            return res.status(200).send({ "Token: " : token });
+            return res.status(200).send({ "Token" : token });
         }catch(error) {
             if (error instanceof z.ZodError) {
             const missingFields = error.issues.map((issue) => issue.path.join('.'));

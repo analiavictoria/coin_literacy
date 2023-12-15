@@ -27,6 +27,7 @@ model BlogPosts {
   imageBlog        String
   categoryBlogPost String
   title            String @unique
+  description      String
   text             String
   youtube_url      String?
   author_email        String

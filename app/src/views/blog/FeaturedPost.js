@@ -3,8 +3,7 @@ import { Typography, Grid, CardActionArea,  CardContent, CardMedia} from '@mui/m
 import SubCard from 'ui-component/cards/SubCard';
 
 
-export default function FeaturedPost(props: FeaturedPostProps) {
-  const { post } = props;
+export default function FeaturedPost() {
 
   return (
     <Grid item xs={12} md={6}>
@@ -13,7 +12,7 @@ export default function FeaturedPost(props: FeaturedPostProps) {
       <CardMedia
             component="img"
             sx={{ width: '100%', height:'18.75rem', display: { xs: 'none', sm: 'block' } }}
-            image={post.image}
+            src={post.imageBlog}
             alt={post.imageLabel}
           />
         
