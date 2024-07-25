@@ -4,10 +4,6 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import { Chart, registerables } from 'chart.js';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
 Chart.register(...registerables);
 
 const currencyDescriptions = {
@@ -42,7 +38,6 @@ const CryptoComparison = () => {
   const [cryptoData, setCryptoData] = useState({
     bitcoin: null,
     ethereum: null,
-<<<<<<< HEAD
     tether: null,
     bnb: null,
     solana: null,
@@ -50,14 +45,6 @@ const CryptoComparison = () => {
     usdc: null,
     toncoin: null,
     dogecoin: null,
-=======
-    ripple: null,
-    litecoin: null,
-    cardano: null,
-    polkadot: null,
-    dogecoin: null,
-    binancecoin: null,
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
   });
 
   const [vsCurrency, setVsCurrency] = useState('brl');
@@ -69,11 +56,7 @@ const CryptoComparison = () => {
           'https://api.coingecko.com/api/v3/simple/price',
           {
             params: {
-<<<<<<< HEAD
               ids: 'bitcoin,ethereum,tether,bnb,solana,xrp,usdc,toncoin,dogecoin',
-=======
-              ids: 'bitcoin,ethereum,ripple,litecoin,cardano,polkadot,dogecoin,binancecoin',
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
               vs_currencies: vsCurrency,
             },
           }
@@ -82,7 +65,6 @@ const CryptoComparison = () => {
         setCryptoData({
           bitcoin: response.data.bitcoin[vsCurrency],
           ethereum: response.data.ethereum[vsCurrency],
-<<<<<<< HEAD
           tether: response.data.tether[vsCurrency],
           bnb: response.data.bnb[vsCurrency],
           solana: response.data.solana[vsCurrency],
@@ -90,14 +72,6 @@ const CryptoComparison = () => {
           usdc: response.data.usdc[vsCurrency],
           toncoin: response.data.toncoin[vsCurrency],
           dogecoin: response.data.dogecoin[vsCurrency],
-=======
-          ripple: response.data.ripple[vsCurrency],
-          litecoin: response.data.litecoin[vsCurrency],
-          cardano: response.data.cardano[vsCurrency],
-          polkadot: response.data.polkadot[vsCurrency],
-          dogecoin: response.data.dogecoin[vsCurrency],
-          binancecoin: response.data.binancecoin[vsCurrency],
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
         });
       } catch (error) {
         console.error('Error fetching crypto data:', error);
@@ -111,7 +85,6 @@ const CryptoComparison = () => {
     labels: [
       'Bitcoin',
       'Ethereum',
-<<<<<<< HEAD
       'Tether',
       'BNB',
       'Solana',
@@ -119,14 +92,6 @@ const CryptoComparison = () => {
       'USDC',
       'Toncoin',
       'Dogecoin',
-=======
-      'Ripple',
-      'Litecoin',
-      'Cardano',
-      'Polkadot',
-      'Dogecoin',
-      'Binance Coin',
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
     ],
     datasets: [
       {
@@ -134,7 +99,6 @@ const CryptoComparison = () => {
         data: [
           cryptoData.bitcoin || 0,
           cryptoData.ethereum || 0,
-<<<<<<< HEAD
           cryptoData.tether || 0,
           cryptoData.bnb || 0,
           cryptoData.solana || 0,
@@ -142,14 +106,6 @@ const CryptoComparison = () => {
           cryptoData.usdc || 0,
           cryptoData.toncoin || 0,
           cryptoData.dogecoin || 0,
-=======
-          cryptoData.ripple || 0,
-          cryptoData.litecoin || 0,
-          cryptoData.cardano || 0,
-          cryptoData.polkadot || 0,
-          cryptoData.dogecoin || 0,
-          cryptoData.binancecoin || 0,
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
         ],
         backgroundColor: '#4bc0c0',
         borderColor: '#25C998',
@@ -161,7 +117,6 @@ const CryptoComparison = () => {
   const chartOptions = {
     scales: {
       y: {
-<<<<<<< HEAD
         type: 'logarithmic', // Altere a escala para logarítmica
         min: 1,
         max: 300000,
@@ -171,11 +126,6 @@ const CryptoComparison = () => {
             return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value);
           },
         },
-=======
-        min: 1000, // Set the minimum value to 1,000 reais
-        max: 250000, // Set the maximum value to 300,000 reais
-        beginAtZero: false, // Remove this line if you want the y-axis to start from the minimum value
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       },
     },
     plugins: {
@@ -184,12 +134,8 @@ const CryptoComparison = () => {
           label: (context) => {
             const label = context.dataset.label || '';
             const value = context.parsed.y || 0;
-<<<<<<< HEAD
             // Formata o valor no tooltip sem decimais
             return `${label}: ${new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(value)} ${vsCurrency.toUpperCase()}`;
-=======
-            return `${label}: ${value} ${vsCurrency.toUpperCase()}`;
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
           },
         },
       },
@@ -207,11 +153,7 @@ const CryptoComparison = () => {
           <Line data={chartData} options={chartOptions} />
         </div>
         <div style={{ marginTop: '10px' }}>
-<<<<<<< HEAD
           <Typography variant="h4" sx={{ my: 2 }}>Escolha a moeda de comparação:</Typography>
-=======
-          <Typography variant="h5" sx={{my:2}}>Escolha a moeda de comparação:</Typography>
->>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
           <TextField select value={vsCurrency} onChange={handleCurrencyChange} variant="outlined" fullWidth>
             {supportedCurrencies.map((currency) => (
               <MenuItem key={currency} value={currency}>
