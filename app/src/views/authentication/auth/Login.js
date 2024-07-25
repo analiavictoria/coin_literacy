@@ -11,8 +11,6 @@ import AuthLogin from '../auth-forms/AuthLogin';
 import Logo from 'ui-component/Logo';
 import AuthFooter from 'ui-component/cards/AuthFooter';
 
-// assets
-
 // ================================|| AUTH3 - LOGIN ||================================ //
 
 const Login = () => {
@@ -21,7 +19,7 @@ const Login = () => {
 
   return (
     <AuthWrapper1>
-      <Grid container direction="column" justifyContent="flex-end" sx={{ minHeight: '100vh' }}>
+      <Grid container direction="column" justifyContent="center" sx={{ minHeight: '100vh' }}>
         <Grid item xs={12}>
           <Grid container justifyContent="center" alignItems="center" sx={{ minHeight: 'calc(100vh - 68px)' }}>
             <Grid item sx={{ m: { xs: 1, sm: 3 }, mb: 0 }}>
@@ -35,11 +33,11 @@ const Login = () => {
                   <Grid item xs={12}>
                     <Grid container direction={matchDownSM ? 'column-reverse' : 'row'} alignItems="center" justifyContent="center">
                       <Grid item>
-                        <Stack alignItems="center" justifyContent="center" spacing={1}>
-                          <Typography color={theme.palette.secondary.main} gutterBottom variant={matchDownSM ? 'h3' : 'h2'}>
-                            Oi, bem-vindo novamente!
+                        <Stack alignItems="center" justifyContent="center" spacing={1} sx={{ textAlign: 'center' }}>
+                          <Typography color={theme.palette.secondary.main} gutterBottom variant={matchDownSM ? 'h4' : 'h3'}>
+                            Olá, bem-vindo novamente!
                           </Typography>
-                          <Typography variant="caption" fontSize="16px" textAlign={matchDownSM ? 'center' : 'inherit'}>
+                          <Typography variant="caption" fontSize="16px">
                             Insira suas credenciais para continuar
                           </Typography>
                         </Stack>
