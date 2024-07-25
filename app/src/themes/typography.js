@@ -12,27 +12,47 @@ export default function themeTypography(theme) {
       fontSize: '0.75rem'
     },
     h5: {
+<<<<<<< HEAD
       fontSize: '1.2rem',
+=======
+      fontSize: '0.875rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       color: theme.heading,
       fontWeight: 500
     },
     h4: {
+<<<<<<< HEAD
       fontSize: '1.4rem',
+=======
+      fontSize: '1rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       color: theme.heading,
       fontWeight: 600
     },
     h3: {
+<<<<<<< HEAD
       fontSize: '2rem',
+=======
+      fontSize: '1.25rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       color: theme.heading,
       fontWeight: 600
     },
     h2: {
+<<<<<<< HEAD
       fontSize: '2.5rem',
+=======
+      fontSize: '1.5rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       color: theme.heading,
       fontWeight: 700
     },
     h1: {
+<<<<<<< HEAD
       fontSize: '3.75rem',
+=======
+      fontSize: '2.125rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       color: theme.heading,
       fontWeight: 700
     },
@@ -52,13 +72,20 @@ export default function themeTypography(theme) {
       fontWeight: 400
     },
     body1: {
+<<<<<<< HEAD
       fontSize: '1.13rem',
+=======
+      fontSize: '0.875rem',
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       fontWeight: 400,
       lineHeight: '1.334em'
     },
     body2: {
       letterSpacing: '0em',
+<<<<<<< HEAD
       fontSize: '1.25rem',
+=======
+>>>>>>> 2d27298a3149859f70b2ae9a0ba41ae43054c53a
       fontWeight: 400,
       lineHeight: '1.5em',
       color: theme.darkTextPrimary
